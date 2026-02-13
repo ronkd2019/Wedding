@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share Your Photos - Oleksandra & Dmytro 🎂</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/submit-photos.css" />
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="lang-switcher">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ua">UA</button>
+        </div>
+        <ul>
+            <li><a href="../index.html" data-i18n="nav-home">Home</a></li>
+            <li><a href="#" class="couple-names">Oleksandra & Dmytro</a></li>
+            <li><a href="./guests.html" data-i18n="nav-guests">Guests</a></li>
+            <li><a href="./highlights.html" data-i18n="nav-highlights">Highlights</a></li>
+            <li><a href="./guestbook.html" data-i18n="nav-wishes">Safe Wishes</a></li>
+            <li><a href="./submit-photos.html" data-i18n="nav-share">Share Photos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="submit-hero">
+        <div class="hero-content">
+            <h2 data-i18n="submit-hero-subtitle">Share Your Memories</h2>
+            <h1 data-i18n="submit-hero-title">Send Us Your Photos</h1>
+            <p data-i18n="submit-hero-desc">We'd love to see the wedding through your eyes! Upload your favorite photos
+                and they'll be sent directly
+                to us.</p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="form-container">
+            <div class="form-header">
+                <h3 data-i18n="form-title">Upload Your Photos</h3>
+                <p data-i18n="form-desc">Share up to 10 photos at a time. We can't wait to see your perspective of our
+                    special day! ❤️</p>
+            </div>
+
+            <!-- FormSubmit Form -->
+            <form action="https://formsubmit.co/ronkd2019@gmail.com" method="POST" enctype="multipart/form-data"
+                id="photoForm">
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="New Wedding Photos Submitted!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+
+                <!-- Name Field -->
+                <div class="form-group">
+                    <label for="name" data-i18n="label-name">Your Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" data-i18n="placeholder-name"
+                        required />
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email" data-i18n="label-email">Your Email (optional)</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com"
+                        data-i18n="placeholder-email" />
+                    <small>We'll only use this to thank you or ask about your photos!</small>
+                </div>
+
+                <!-- Message Field -->
+                <div class="form-group">
+                    <label for="message" data-i18n="label-message">Message (optional)</label>
+                    <textarea id="message" name="message" rows="4"
+                        placeholder="Any special moments or stories you'd like to share?"
+                        data-i18n="placeholder-message"></textarea>
+                </div>
+
+                <!-- File Upload -->
+                <div class="form-group">
+                    <label for="photos" data-i18n="label-upload">Upload Photos <span class="required">*</span></label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="photos" name="attachment" accept="image/*" multiple required />
+                        <label for="photos" class="file-upload-label">
+                            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <span class="upload-text" data-i18n="upload-text">Click to select photos or drag and
+                                drop</span>
+                            <span class="upload-hint" data-i18n="upload-hint">You can select multiple photos at once
+                                (max 10)</span>
+                        </label>
+                    </div>
+                    <div id="fileList" class="file-list"></div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">
+                    <span data-i18n="btn-submit">Send Photos</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </form>
+
+            <div class="form-footer">
+                <p data-i18n="tip-text">💡 <strong>Tip:</strong> Photos will be sent directly to our email. We'll
+                    cherish every single one!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-nav">
+            <a href="../index.html" data-i18n="nav-home">Home</a>
+            <a href="guests.html" data-i18n="nav-guests">Guests</a>
+            <a href="./highlights.html" data-i18n="nav-highlights">Highlights</a>
+            <a href="./guestbook.html" data-i18n="nav-wishes">Safe Wishes</a>
+            <a href="./submit-photos.html" data-i18n="nav-share">Share Photos</a>
+        </div>
+        <p>Oleksandra & Dmytro • October 2024</p>
+        <div class="footer-credit">
+            <span data-i18n="footer-by">Website by</span>
+            <a href="https://instagram.com/dnlkxx" target="_blank">Daniil</a>
+            | <span data-i18n="footer-made">Made with</span> ♡
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/i18n.js"></script>
+    <script src="../js/submit-photos.js"></script>
+</body>
+
+</html>

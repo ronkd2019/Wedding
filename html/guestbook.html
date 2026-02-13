@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guestbook - Oleksandra & Dmytro 🎂</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&family=Kelly+Slab&family=Neucha&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/guestbook.css" />
+</head>
+
+<body>
+    <!-- Corkboard Background -->
+    <div class="corkboard-texture"></div>
+
+    <!-- Navigation -->
+    <nav class="guestbook-nav">
+        <div class="nav-left">
+            <a href="../index.html" class="nav-pin" data-i18n="back-home">← Back Home</a>
+        </div>
+        <h1 class="page-title" data-i18n="guestbook-title">Leave a Message</h1>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ua">UA</button>
+            </div>
+            <button id="addNoteBtn" class="nav-pin primary" data-i18n="btn-add-note">Write a Note ✏️</button>
+        </div>
+    </nav>
+
+    <!-- Messages Board -->
+    <div class="board-container" id="board">
+        <!-- Notes will be injected here -->
+    </div>
+
+    <!-- Add Note Modal -->
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 data-i18n="modal-title">Write your wish</h2>
+            <form id="noteForm">
+                <div class="form-group">
+                    <label for="guestName" data-i18n="label-name">Your Name</label>
+                    <input type="text" id="guestName" required maxlength="30">
+                </div>
+                <div class="form-group">
+                    <label for="guestMessage" data-i18n="label-message">Message</label>
+                    <textarea id="guestMessage" required maxlength="150" rows="4"></textarea>
+                </div>
+                <div class="color-picker">
+                    <label data-i18n="label-color">Pick a color:</label>
+                    <div class="colors">
+                        <div class="color-option selected" data-color="yellow" style="background:#fff740"></div>
+                        <div class="color-option" data-color="pink" style="background:#ff7eb9"></div>
+                        <div class="color-option" data-color="green" style="background:#7afcff"></div>
+                        <div class="color-option" data-color="blue" style="background:#aeebff"></div>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn" data-i18n="btn-post">Post It!</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content small">
+            <span class="close-modal" id="closeAdmin">&times;</span>
+            <h2 data-i18n="admin-title">Admin Login</h2>
+            <form id="adminForm">
+                <div class="form-group">
+                    <label for="adminPass" data-i18n="label-password">Password</label>
+                    <input type="password" id="adminPass" required>
+                </div>
+                <button type="submit" class="submit-btn" data-i18n="btn-login">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="guestbook-footer">
+        <div class="admin-trigger" id="adminTrigger">π</div>
+    </footer>
+
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/guestbook.js"></script>
+</body>
+
+</html>

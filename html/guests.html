@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Guests - Oleksandra & Dmytro 🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&family=Kelly+Slab&family=Neucha&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/guests.css" />
+</head>
+
+<body>
+  <!-- Corkboard Background -->
+  <div class="corkboard-texture"></div>
+
+  <!-- Navigation -->
+  <nav class="guests-nav">
+    <div class="nav-left">
+      <a href="../index.html" class="nav-pin" data-i18n="back-home">← Back Home</a>
+    </div>
+    <h1 class="page-title" data-i18n="guests-title">Our Amazing People!</h1>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ua">UA</button>
+      </div>
+      <a href="./guestbook.html" class="nav-pin" data-i18n="nav-wishes">Safe Wishes</a>
+      <a href="submit-photos.html" class="nav-pin" data-i18n="nav-share">Share Photos →</a>
+    </div>
+  </nav>
+
+  <!-- Polaroid Gallery -->
+  <div class="polaroid-container">
+    <!-- Guests will be loaded dynamically from ../js/guests.json -->
+  </div>
+
+  <!-- Handwritten Note -->
+  <div class="sticky-note">
+    <p data-i18n="guests-hint">Click on the polaroids to see who's there! 📸</p>
+    <div class="note-pin"></div>
+  </div>
+
+  <script src="../js/i18n.js"></script>
+  <script src="../js/guests.js"></script>
+</body>
+
+</html>

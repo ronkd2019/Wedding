@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Highlights - Oleksandra & Dmytro 🎂</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&family=Kelly+Slab&family=Neucha&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/guests.css" />
+    <link rel="stylesheet" href="../css/highlights.css" />
+</head>
+
+<body>
+    <!-- Corkboard Background -->
+    <div class="corkboard-texture"></div>
+
+    <!-- Navigation -->
+    <nav class="guests-nav">
+        <div class="nav-left">
+            <a href="../index.html" class="nav-pin" data-i18n="back-home">← Back Home</a>
+        </div>
+        <h1 class="page-title" data-i18n="highlight-title">Wedding Highlights</h1>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ua">UA</button>
+            </div>
+            <a href="./guestbook.html" class="nav-pin" data-i18n="nav-wishes">Safe Wishes</a>
+            <a href="./submit-photos.html" class="nav-pin" data-i18n="nav-share">Share Photos →</a>
+        </div>
+    </nav>
+
+    <!-- Gallery Container -->
+    <div class="highlight-grid">
+        <!-- Item 1 -->
+        <div class="highlight-item" style="--rotation: 2deg">
+            <div class="tape" style="--tape-rotation: -3deg"></div>
+            <div class="corner-decoration"></div>
+            <img src="../images/wedding-hero.jpg" alt="Ceremony" class="highlight-photo">
+            <div class="highlight-caption" data-i18n="caption-ceremony">The Ceremony</div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="highlight-item" style="--rotation: -3deg">
+            <div class="tape" style="--tape-rotation: 2deg"></div>
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600" alt="First Dance"
+                class="highlight-photo">
+            <div class="highlight-caption" data-i18n="caption-dance">First Dance</div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="highlight-item" style="--rotation: 1deg">
+            <div class="tape" style="--tape-rotation: -1deg"></div>
+            <div class="corner-decoration"></div>
+            <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?w=600" alt="Cake Cutting"
+                class="highlight-photo">
+            <div class="highlight-caption" data-i18n="caption-sweet">Sweet Moments</div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="highlight-item" style="--rotation: -2deg">
+            <div class="tape" style="--tape-rotation: 4deg"></div>
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?w=600" alt="Party"
+                class="highlight-photo">
+            <div class="highlight-caption" data-i18n="caption-party">Party Time!</div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="highlight-item" style="--rotation: 3deg">
+            <div class="tape" style="--tape-rotation: -2deg"></div>
+            <div class="corner-decoration"></div>
+            <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?w=600" alt="Friends"
+                class="highlight-photo">
+            <div class="highlight-caption" data-i18n="caption-friends">Friends & Family</div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="highlight-item" style="--rotation: -1deg">
+            <div class="tape" style="--tape-rotation: 1deg"></div>
+            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600" alt="Just Married"
+                class="highlight-photo">
+            <div class="highlight-caption" data-i18n="caption-married">Just Married</div>
+        </div>
+    </div>
+
+    <!-- Spotify Playlist Section -->
+    <div class="playlist-section">
+        <h2 class="playlist-title" data-i18n="playlist-title">Our Wedding Vibe 🎵</h2>
+        <div class="playlist-container">
+            <div class="playlist-tape"></div>
+            <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTHQX9d3d3s2?utm_source=generator&theme=0"
+                width="100%" height="352" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <!-- Note -->
+    <div class="sticky-note">
+        <p data-i18n="highlights-note">Best day of our lives!</p>
+        <div class="note-pin"></div>
+    </div>
+
+    <script src="../js/i18n.js"></script>
+</body>
+
+</html>
