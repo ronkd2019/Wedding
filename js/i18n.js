@@ -69,7 +69,7 @@ const translations = {
         "playlist-title": "Our Wedding Vibe 🎵",
         "guestbook-title": "Leave a Message",
         "btn-add-note": "Write a Note ✏️",
-        "nav-wishes": "Safe Wishes",
+        "nav-wishes": "Leave a Wish",
         "modal-title": "Write your wish",
         "label-color": "Pick a color:",
         "btn-post": "Post It!",
