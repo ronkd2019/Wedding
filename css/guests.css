@@ -52,6 +52,8 @@ body {
   box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
   border: 1px solid rgba(139, 90, 43, 0.2);
+  border-radius: 3px 5px 3px 8px;
+  white-space: nowrap;
 }
 
 .nav-pin:hover {
@@ -74,6 +76,9 @@ body {
 .lang-switcher {
   display: flex;
   gap: 8px;
+  /* Override absolute positioning from style.css */
+  position: static;
+  transform: none;
 }
 
 .lang-btn {
