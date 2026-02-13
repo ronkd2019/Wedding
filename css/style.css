@@ -28,6 +28,12 @@ body {
   overflow-x: hidden;
 }
 
+@media screen and (min-width: 1024px) {
+  body {
+    zoom: 0.75;
+  }
+}
+
 a {
   text-decoration: none;
   color: inherit;

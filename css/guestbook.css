@@ -16,6 +16,13 @@ body {
     flex-direction: column;
 }
 
+@media screen and (min-width: 1024px) {
+    body {
+        min-height: 133.33vh;
+        /* Compensate for zoom: 0.75 */
+    }
+}
+
 /* Corkboard Background */
 .corkboard-texture {
     position: fixed;
@@ -89,6 +96,9 @@ body {
     gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
+    flex: 1;
+    /* Pushes footer down */
+    width: 100%;
 }
 
 /* Sticky Notes */
@@ -305,14 +315,14 @@ textarea:focus {
 
 .admin-trigger {
     cursor: pointer;
-    color: rgba(0, 0, 0, 0.1);
-    /* Almost invisible */
-    font-size: 12px;
-    transition: color 0.3s;
+    color: #000;
+    font-size: 18px;
+    transition: transform 0.3s;
+    margin-top: 20px;
 }
 
 .admin-trigger:hover {
-    color: rgba(0, 0, 0, 0.5);
+    transform: scale(1.2);
 }
 
 /* Responsive */
