@@ -10,7 +10,7 @@
     color: white;
     text-align: center;
     padding: 100px 20px 60px;
-    margin-top: 70px;
+    margin-top: 80px;
 }
 
 .hero-content h2 {
@@ -285,6 +285,11 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    .submit-hero {
+        margin-top: 150px;
+        padding-top: 60px;
+    }
+
     .hero-content h1 {
         font-size: 3rem;
     }
