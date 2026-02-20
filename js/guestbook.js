@@ -105,21 +105,70 @@ function saveMessage(msg) {
 function deleteMessage(id) {
     if (!AppState.isAdmin) return;
 
-    if (confirm("Are you sure you want to delete this note?")) {
-        if (AppState.db) {
-            // Delete from Firestore
-            AppState.db.collection("messages").doc(id).delete()
-                .then(() => {
-                    console.log("Message deleted!");
-                }).catch((error) => {
-                    console.error("Error deleting:", error);
-                });
-        } else {
-            // Delete from LocalStorage
-            AppState.messages = AppState.messages.filter(m => String(m.id) !== String(id));
-            localStorage.setItem('wedding_guestbook_messages', JSON.stringify(AppState.messages));
-            renderBoard();
+    // Check if user has opted out of confirmation
+    const dontAsk = localStorage.getItem('wedding_guestbook_dont_ask_delete');
+    if (dontAsk === 'true') {
+        performDelete(id);
+        return;
+    }
+
+    // Show Confirmation Modal
+    const modal = document.getElementById('confirmDeleteModal');
+    const confirmBtn = document.getElementById('confirmDelete');
+    const cancelBtn = document.getElementById('cancelDelete');
+    const dontAskCheckbox = document.getElementById('dontAskAgain');
+
+    modal.style.display = 'block';
+
+    // Reset checkbox
+    dontAskCheckbox.checked = false;
+
+    // Handle Confirm
+    const onConfirm = () => {
+        if (dontAskCheckbox.checked) {
+            localStorage.setItem('wedding_guestbook_dont_ask_delete', 'true');
         }
+        performDelete(id);
+        closeModal();
+    };
+
+    // Handle Cancel
+    const onCancel = () => {
+        closeModal();
+    };
+
+    // Cleanup and Close Helper
+    const closeModal = () => {
+        modal.style.display = 'none';
+        confirmBtn.removeEventListener('click', onConfirm);
+        cancelBtn.removeEventListener('click', onCancel);
+    };
+
+    confirmBtn.addEventListener('click', onConfirm);
+    cancelBtn.addEventListener('click', onCancel);
+
+    // Close on click outside (optional, but good UX)
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+}
+
+function performDelete(id) {
+    if (AppState.db) {
+        // Delete from Firestore
+        AppState.db.collection("messages").doc(id).delete()
+            .then(() => {
+                console.log("Message deleted!");
+            }).catch((error) => {
+                console.error("Error deleting:", error);
+            });
+    } else {
+        // Delete from LocalStorage
+        AppState.messages = AppState.messages.filter(m => String(m.id) !== String(id));
+        localStorage.setItem('wedding_guestbook_messages', JSON.stringify(AppState.messages));
+        renderBoard();
     }
 }
 

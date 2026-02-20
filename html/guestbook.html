@@ -19,19 +19,27 @@
     <div class="corkboard-texture"></div>
 
     <!-- Navigation -->
-    <nav class="guestbook-nav">
-        <div class="nav-left">
-            <a href="../index.html" class="nav-pin" data-i18n="back-home">← Back Home</a>
+    <!-- Navigation -->
+    <nav>
+        <div class="lang-switcher">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="ua">UA</button>
         </div>
-        <h1 class="page-title" data-i18n="guestbook-title">Leave a Message</h1>
-        <div class="nav-right">
-            <div class="lang-switcher">
-                <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="ua">UA</button>
-            </div>
-            <button id="addNoteBtn" class="nav-pin primary" data-i18n="btn-add-note">Write a Note ✏️</button>
-        </div>
+        <ul>
+            <li><a href="../index.html" data-i18n="nav-home">Home</a></li>
+            <li><a href="#" class="couple-names">Oleksandra & Dmytro</a></li>
+            <li><a href="./guests.html" data-i18n="nav-guests">Guests</a></li>
+            <li><a href="./highlights.html" data-i18n="nav-highlights">Highlights</a></li>
+            <li><a href="./guestbook.html" data-i18n="nav-wishes">Safe Wishes</a></li>
+            <li><a href="./submit-photos.html" data-i18n="nav-share">Share Photos</a></li>
+        </ul>
     </nav>
+
+    <div
+        style="margin-top: 120px; text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <h1 class="page-title" data-i18n="guestbook-title">Leave a Message</h1>
+        <button id="addNoteBtn" class="nav-pin primary" data-i18n="btn-add-note">Write a Note ✏️</button>
+    </div>
 
     <!-- Messages Board -->
     <div class="board-container" id="board">
@@ -81,6 +89,33 @@
         </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div id="confirmDeleteModal" class="modal">
+        <div class="modal-content small">
+            <h2 data-i18n="confirm-delete-title" style="font-family: var(--font-heading); color: var(--primary-color);">
+                Delete Note?</h2>
+            <p data-i18n="confirm-delete-text"
+                style="font-family: var(--font-body); color: var(--text-color); margin-bottom: 20px;">Are you sure you
+                want to
+                remove this message? This cannot be undone.</p>
+
+            <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="dontAskAgain" style="width: auto; accent-color: var(--primary-color);">
+                <label for="dontAskAgain" data-i18n="label-dont-ask"
+                    style="font-family: var(--font-body); font-size: 0.9rem; margin: 0; font-weight: 400; color: var(--text-color);">Do
+                    not
+                    show again</label>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <button id="cancelDelete" class="submit-btn" style="background: #e0e0e0; color: #333;"
+                    data-i18n="btn-cancel">Cancel</button>
+                <button id="confirmDelete" class="submit-btn" style="background: var(--accent-color); color: #fff;"
+                    data-i18n="btn-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <!-- Footer -->
     <footer style="margin-top: auto;">
@@ -105,6 +140,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
+    <script src="../js/common.js"></script>
     <script src="../js/i18n.js"></script>
     <script src="../js/guestbook.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>

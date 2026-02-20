@@ -10,6 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&family=Kelly+Slab&family=Neucha&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/guests.css" />
 </head>
 
@@ -18,20 +19,25 @@
   <div class="corkboard-texture"></div>
 
   <!-- Navigation -->
-  <nav class="guests-nav">
-    <div class="nav-left">
-      <a href="../index.html" class="nav-pin" data-i18n="back-home">← Back Home</a>
+  <!-- Navigation -->
+  <nav>
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="ua">UA</button>
     </div>
-    <h1 class="page-title" data-i18n="guests-title">Our Amazing People!</h1>
-    <div class="nav-right">
-      <div class="lang-switcher">
-        <button class="lang-btn" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="ua">UA</button>
-      </div>
-      <a href="./guestbook.html" class="nav-pin" data-i18n="nav-wishes">Safe Wishes</a>
-      <a href="submit-photos.html" class="nav-pin" data-i18n="nav-share">Share Photos →</a>
-    </div>
+    <ul>
+      <li><a href="../index.html" data-i18n="nav-home">Home</a></li>
+      <li><a href="#" class="couple-names">Oleksandra & Dmytro</a></li>
+      <li><a href="./guests.html" data-i18n="nav-guests">Guests</a></li>
+      <li><a href="./highlights.html" data-i18n="nav-highlights">Highlights</a></li>
+      <li><a href="./guestbook.html" data-i18n="nav-wishes">Safe Wishes</a></li>
+      <li><a href="./submit-photos.html" data-i18n="nav-share">Share Photos</a></li>
+    </ul>
   </nav>
+
+  <div style="margin-top: 120px; text-align: center; position: relative; z-index: 1;">
+    <h1 class="page-title" data-i18n="guests-title">Our Amazing People!</h1>
+  </div>
 
   <!-- Polaroid Gallery -->
   <div class="polaroid-container">
@@ -44,6 +50,7 @@
     <div class="note-pin"></div>
   </div>
 
+  <script src="../js/common.js"></script>
   <script src="../js/i18n.js"></script>
   <script src="../js/guests.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>

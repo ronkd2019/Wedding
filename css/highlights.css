@@ -15,7 +15,8 @@
   padding: 12px 12px 45px 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   transform: rotate(var(--rotation));
 }
 

@@ -1,74 +1,100 @@
 // Wedding date: October 17, 2024
 const weddingDate = new Date("2024-10-17T00:00:00");
 
-// Function to calculate time difference using calendar logic
+// Store previous values to detect changes
+let previousValues = {
+    years: -1,
+    days: -1,
+    hours: -1,
+    minutes: -1,
+    seconds: -1
+};
+
+// Initialize the counter structure (create digit strips)
+function initCounter() {
+    const ids = ['years', 'days', 'hours', 'minutes', 'seconds'];
+
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        // Determine number of digits needed (max expected)
+        // Years: 2, Days: 3, Hours: 2, Mins: 2, Secs: 2
+        let digitCount = 2;
+        if (id === 'days') digitCount = 3;
+
+        el.innerHTML = '';
+        el.classList.add('counter-wrapper');
+
+        // Create a strip for each digit place
+        for (let i = 0; i < digitCount; i++) {
+            const digitGroup = document.createElement('div');
+            digitGroup.className = 'counter-digit-group';
+            // Create stack of 0-9
+            for (let num = 0; num <= 9; num++) {
+                const span = document.createElement('span');
+                span.className = 'counter-digit';
+                span.textContent = num;
+                digitGroup.appendChild(span);
+            }
+            el.appendChild(digitGroup);
+        }
+    });
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+}
+
 function updateCounter() {
     const now = new Date();
 
     // 1. Calculate Years
     let years = now.getFullYear() - weddingDate.getFullYear();
-
-    // Check if we've reached the anniversary this year
-    // Create a date for this year's potential anniversary
     const anniversaryThisYear = new Date(weddingDate);
     anniversaryThisYear.setFullYear(now.getFullYear());
-
-    // If now is before the anniversary, we haven't completed this year yet
-    if (now < anniversaryThisYear) {
-        years--;
-    }
+    if (now < anniversaryThisYear) years--;
 
     // 2. Calculate Days
-    // Get the date of the last completed anniversary
     const lastAnniversary = new Date(weddingDate);
     lastAnniversary.setFullYear(weddingDate.getFullYear() + years);
-
-    // Calculate days difference between last anniversary and today (ignoring time)
-    // We reset both to midnight to count full calendar days passed
     const nowMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const lastAnniversaryMidnight = new Date(lastAnniversary.getFullYear(), lastAnniversary.getMonth(), lastAnniversary.getDate());
-
-    // Time difference in milliseconds
     const diffTime = nowMidnight - lastAnniversaryMidnight;
-    // Convert to days, rounding to handle potential DST adjustments (23h or 25h days)
     const days = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
-    // 3. Calculate Hours, Minutes, Seconds
-    // Since the wedding was at 00:00:00, the time passed today is simply the current time
+    // 3. Time
     const hours = now.getHours();
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
-    // Get elements
-    const yearsEl = document.getElementById("years");
-    const daysEl = document.getElementById("days");
-    const hoursEl = document.getElementById("hours");
-    const minutesEl = document.getElementById("minutes");
-    const secondsEl = document.getElementById("seconds");
-
-    // Update values
-    updateValue(yearsEl, years);
-    updateValue(daysEl, days);
-    updateValue(hoursEl, hours);
-    updateValue(minutesEl, minutes);
-    updateValue(secondsEl, seconds);
+    // Update UI with animations
+    updateSegment('years', years, 2);
+    updateSegment('days', days, 3);
+    updateSegment('hours', hours, 2);
+    updateSegment('minutes', minutes, 2);
+    updateSegment('seconds', seconds, 2);
 }
 
-// Function to update value with pulse animation
-function updateValue(element, newValue) {
-    // Format with leading zero if less than 10
-    const formattedValue = newValue < 10 ? `0${newValue}` : newValue;
+function updateSegment(id, value, minDigits) {
+    const el = document.getElementById(id);
+    if (!el) return;
 
-    if (element && element.textContent !== formattedValue.toString()) {
-        element.textContent = formattedValue;
+    // Pad value with zeros (e.g. 5 -> "05", 1 -> "001" for days)
+    const valStr = value.toString().padStart(minDigits, '0');
 
-        // Trigger pulse animation (scale only, no color change)
-        element.classList.remove("pulse");
-        void element.offsetWidth; // Trigger reflow
-        element.classList.add("pulse");
-    }
+    // Get all digit groups (strips)
+    const groups = el.querySelectorAll('.counter-digit-group');
+
+    // Update each strip
+    valStr.split('').forEach((digitStr, index) => {
+        if (groups[index]) {
+            const digit = parseInt(digitStr, 10);
+            // Height of one digit is ~1.25em defined in CSS
+            // We translate up by digit * 1.25em
+            groups[index].style.transform = `translateY(-${digit * 1.25}em)`;
+        }
+    });
 }
 
-// Update counter immediately and then every second
-updateCounter();
-setInterval(updateCounter, 1000);
+// Start
+document.addEventListener('DOMContentLoaded', initCounter);

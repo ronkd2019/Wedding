@@ -75,7 +75,12 @@ const translations = {
         "btn-post": "Post It!",
         "admin-title": "Admin Login",
         "label-password": "Password",
-        "btn-login": "Login"
+        "btn-login": "Login",
+        "confirm-delete-title": "Delete Note?",
+        "confirm-delete-text": "Are you sure you want to remove this message? This cannot be undone.",
+        "label-dont-ask": "Do not show again",
+        "btn-cancel": "Cancel",
+        "btn-delete": "Delete"
     },
     ua: {
         "nav-home": "Головна",
@@ -153,7 +158,12 @@ const translations = {
         "btn-post": "Написати!",
         "admin-title": "Вхід для адміністратора",
         "label-password": "Пароль",
-        "btn-login": "Увійти"
+        "btn-login": "Увійти",
+        "confirm-delete-title": "Видалити побажання?",
+        "confirm-delete-text": "Ви впевнені, що хочете видалити це повідомлення? Цю дію неможливо скасувати.",
+        "label-dont-ask": "Більше не запитувати",
+        "btn-cancel": "Скасувати",
+        "btn-delete": "Видалити"
     }
 };
 

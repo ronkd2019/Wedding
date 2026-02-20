@@ -196,11 +196,10 @@ body.admin-mode .delete-btn {
 }
 
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
@@ -219,8 +218,7 @@ body.admin-mode .delete-btn {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: relative;
-    font-family: "Inter", sans-serif;
-    /* Cleaner font for form */
+    font-family: var(--font-body);
 }
 
 .close-modal {
