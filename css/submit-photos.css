@@ -1,42 +1,6 @@
 /* Submit Photos Page Styling */
 
-/* Hero Section */
-.submit-hero {
-    min-height: 40vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #8B7355 0%, #6d5a44 100%);
-    color: white;
-    text-align: center;
-    padding: 100px 20px 60px;
-    margin-top: 80px;
-}
-
-.hero-content h2 {
-    font-family: 'Kelly Slab', cursive;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    opacity: 0.9;
-    letter-spacing: 2px;
-    color: white;
-}
-
-.hero-content h1 {
-    font-family: 'Caveat', cursive;
-    font-size: 4rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-    color: white;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-    opacity: 0.95;
-}
+/* (Page header band is now handled globally by .page-header in style.css) */
 
 /* Form Section */
 .form-section {
@@ -107,7 +71,7 @@
     outline: 2px solid var(--primary-color);
     outline-offset: 0;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(139, 115, 85, 0.12);
+    box-shadow: 0 0 0 4px rgba(196, 112, 74, 0.12);
 }
 
 .form-group small {
@@ -146,7 +110,7 @@
 .file-upload-label:hover,
 .file-upload-label.drag-over {
     border-color: var(--primary-color);
-    background: rgba(139, 115, 85, 0.05);
+    background: rgba(196, 112, 74, 0.05);
 }
 
 .upload-icon {
@@ -244,7 +208,7 @@
     justify-content: center;
     gap: 10px;
     padding: 16px 32px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, #6d5a44 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     color: white;
     border: none;
     border-radius: 12px;
@@ -257,7 +221,7 @@
 
 .submit-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(139, 115, 85, 0.3);
+    box-shadow: 0 8px 20px rgba(196, 112, 74, 0.3);
 }
 
 .submit-btn:disabled {

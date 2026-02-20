@@ -64,8 +64,8 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  border-top: 3px solid #d4af37;
-  border-left: 3px solid #d4af37;
+  border-top: 3px solid #C4704A;
+  border-left: 3px solid #C4704A;
   top: -5px;
   left: -5px;
   opacity: 0.6;
@@ -74,8 +74,8 @@
 
 .highlight-item:nth-child(even) .corner-decoration {
   border: none;
-  border-bottom: 3px solid #d4af37;
-  border-right: 3px solid #d4af37;
+  border-bottom: 3px solid #C4704A;
+  border-right: 3px solid #C4704A;
   top: auto;
   left: auto;
   bottom: -5px;
@@ -108,7 +108,7 @@
 .playlist-title {
   font-family: 'Neucha', cursive;
   font-size: 3rem;
-  color: #3a2410;
+  color: #7A3B1E;
   margin-bottom: 30px;
   text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
   display: inline-block;

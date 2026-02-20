@@ -7,7 +7,7 @@
 
 body {
   font-family: "Caveat", cursive;
-  background: linear-gradient(135deg, #fff 0%, #faf8f3 50%, #ebe0d1 100%);
+  background: linear-gradient(135deg, #fff 0%, #fbf7f0 50%, #f0e8dc 100%);
   /* iOS Safari ignores fixed. Scroll is almost identical visually on mobile. */
   background-attachment: scroll;
   min-height: 100vh;
@@ -31,7 +31,7 @@ body {
 .page-title {
   font-family: "Neucha", cursive;
   font-size: 58px;
-  color: #3a2410;
+  color: #5C2A0E;
   text-align: center;
   transform: rotate(-2deg);
   text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.4);
@@ -255,9 +255,12 @@ body {
   background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
   box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.2),
     inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-  /* Replaced continuous animation with simple translateZ(0) — the infinite
-     floatNote animation was forcing a compositor tick every frame even off-screen. */
+  /* No continuous animation — translateZ(0) still promotes to own GPU layer */
   transform: rotate(4deg) translateZ(0);
+  font-family: "Caveat", cursive;
+  font-size: 22px;
+  color: #5C2A0E;
+  line-height: 1.6;
   z-index: 1000;
   border: 1px solid rgba(139, 90, 43, 0.1);
 }

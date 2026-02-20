@@ -85,7 +85,7 @@ function initRopes() {
         // Create SVG Paths
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('fill', 'none');
-        path.setAttribute('stroke', '#8b7355');
+        path.setAttribute('stroke', '#C4704A');
         path.setAttribute('stroke-width', '4');
         path.setAttribute('stroke-dasharray', '8 4');
         path.setAttribute('stroke-linecap', 'round');

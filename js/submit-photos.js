@@ -158,6 +158,22 @@ function formatFileSize(bytes) {
 
 // Form submission handling
 form.addEventListener('submit', function (e) {
+    // Validate required name field (novalidate disables browser built-in checking)
+    const nameField = document.getElementById('name');
+    if (!nameField.value.trim()) {
+        e.preventDefault();
+        nameField.setAttribute('aria-invalid', 'true');
+        nameField.style.borderColor = '#9E4F2E';
+        showError('Please enter your name before submitting.');
+        nameField.focus();
+        nameField.addEventListener('input', function clearErr() {
+            nameField.removeAttribute('aria-invalid');
+            nameField.style.borderColor = '';
+            nameField.removeEventListener('input', clearErr);
+        });
+        return;
+    }
+
     // Validate at least one photo is selected
     if (selectedFiles.length === 0) {
         e.preventDefault();

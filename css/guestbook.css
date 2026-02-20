@@ -7,7 +7,7 @@
 
 body {
     font-family: "Caveat", cursive;
-    background: linear-gradient(135deg, #fff 0%, #faf8f3 50%, #e8f4e8 100%);
+    background: linear-gradient(135deg, #fff 0%, #fbf7f0 50%, #f0e8dc 100%);
     /* background-attachment: fixed is broken on iOS Safari — use scroll there */
     background-attachment: scroll;
     min-height: 100vh;
@@ -32,7 +32,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: #d4af37;
+    background-color: #C4704A;
     background-image: url("https://www.transparenttextures.com/patterns/cork-1.png");
     /* Simple cork pattern if available, fallback */
     background-blend-mode: overlay;
@@ -40,29 +40,11 @@ body {
     /* Blend with gradient */
 }
 
-/* Navigation */
-.guestbook-nav {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
-    -webkit-align-items: center;
-    align-items: center;
-    padding: 20px 40px;
-    z-index: 100;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    background: rgba(255, 255, 255, 0.95);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
 
 .nav-pin {
     font-family: "Kelly Slab", cursive;
     font-size: 16px;
-    color: #5a3a1a;
+    color: #7A3B1E;
     text-decoration: none;
     background: #fffacd;
     padding: 8px 16px;
@@ -88,7 +70,7 @@ body {
 .page-title {
     font-family: "Neucha", cursive;
     font-size: 48px;
-    color: #3a2410;
+    color: #5C2A0E;
     text-align: center;
     transform: rotate(-2deg);
 }
@@ -152,7 +134,7 @@ body {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #e74c3c, #c0392b);
+    background: radial-gradient(circle at 30% 30%, #C4704A, #9E4F2E);
     position: absolute;
     top: 10px;
     left: 50%;
@@ -181,7 +163,7 @@ body {
     right: 5px;
     background: transparent;
     border: none;
-    color: #c0392b;
+    color: #6B7C45;
     /* Red */
     font-size: 1.2rem;
     cursor: pointer;
@@ -274,10 +256,10 @@ textarea {
 
 input:focus,
 textarea:focus {
-    border-color: #d4af37;
-    outline: 2px solid #d4af37;
+    border-color: #C4704A;
+    outline: 2px solid #C4704A;
     outline-offset: 0;
-    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 0 4px rgba(196, 112, 74, 0.15);
 }
 
 /* Color Picker */
@@ -308,7 +290,7 @@ textarea:focus {
 .submit-btn {
     width: 100%;
     padding: 12px;
-    background: #d4af37;
+    background: #C4704A;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -319,7 +301,7 @@ textarea:focus {
 }
 
 .submit-btn:hover {
-    background: #b59025;
+    background: #9E4F2E;
 }
 
 /* Footer Trigger */
@@ -330,6 +312,10 @@ textarea:focus {
 }
 
 .admin-trigger {
+    /* Reset browser button defaults (changed from div to button element) */
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
     color: #000;
     font-size: 18px;

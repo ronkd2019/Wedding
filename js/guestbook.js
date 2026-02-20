@@ -388,7 +388,7 @@ function setupAdminListeners() {
             setTimeout(() => toast.remove(), 3000);
         } else {
             const passField = document.getElementById('adminPass');
-            passField.style.borderColor = '#e74c3c';
+            passField.style.borderColor = '#9E4F2E';
             passField.setAttribute('aria-invalid', 'true');
             passField.focus();
             setTimeout(() => {

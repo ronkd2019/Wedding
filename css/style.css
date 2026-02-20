@@ -1,23 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600&family=Kelly+Slab&family=Neucha&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600&family=Neucha&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
 /* Reset & Variables */
 :root {
-  --primary-color: #8B7355;
-  --primary-dark: #6d5a43;
-  --secondary-color: #D4A574;
+  --primary-color: #C4704A;
+  /* Terracotta */
+  --primary-dark: #9E4F2E;
+  /* Burnt sienna */
+  --secondary-color: #E8C99A;
+  /* Warm sand */
   --text-color: #2c2c2c;
   --text-light: #666;
-  --bg-color: #FAF8F3;
+  --bg-color: #FBF7F0;
+  /* Warm cream */
   --white: #FFFFFF;
-  --accent-color: #C0392B;
+  --accent-color: #6B7C45;
+  /* Olive green */
 
-  /* Typography Scale */
-  --font-heading: 'Kelly Slab', serif;
-  /* Premium feeling serif */
-  --font-subheading: 'Caveat', cursive;
-  /* Handwritten accents */
+  /* Typography — 3 fonts, 3 clear roles */
+  --font-heading: 'Neucha', cursive;
+  /* All section & page headings */
+  --font-accent: 'Caveat', cursive;
+  /* Couple name + handwritten accents */
   --font-body: 'Inter', sans-serif;
-  /* Clean, readable body */
+  /* All body and nav link text */
 
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -105,7 +110,7 @@ select:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 0;
   border-color: var(--primary-color) !important;
-  box-shadow: 0 0 0 4px rgba(139, 115, 85, 0.15);
+  box-shadow: 0 0 0 4px rgba(196, 112, 74, 0.15);
 }
 
 /* Buttons — subtle warm ring */
@@ -141,9 +146,32 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.7;
-  /* Better readability */
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Subtle paper grain — present on ALL pages, creates physical texture feel */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(45deg,
+      rgba(196, 112, 74, 0.022) 0px,
+      rgba(196, 112, 74, 0.022) 1px,
+      transparent 1px,
+      transparent 6px),
+    repeating-linear-gradient(-45deg,
+      rgba(196, 112, 74, 0.012) 0px,
+      rgba(196, 112, 74, 0.012) 1px,
+      transparent 1px,
+      transparent 6px);
 }
 
 /* Prevent scroll when menu is open */
@@ -195,13 +223,13 @@ h3 {
 .btn-primary {
   background-color: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
+  box-shadow: 0 4px 15px rgba(196, 112, 74, 0.3);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 115, 85, 0.4);
+  box-shadow: 0 6px 20px rgba(196, 112, 74, 0.4);
 }
 
 .btn-outline {
@@ -211,7 +239,7 @@ h3 {
 }
 
 .btn-outline:hover {
-  background: rgba(139, 115, 85, 0.1);
+  background: rgba(196, 112, 74, 0.1);
 }
 
 /* --- Navigation --- */
@@ -259,9 +287,9 @@ nav ul {
 
 nav a {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 1rem;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: var(--text-color);
   font-weight: 500;
   padding: 5px 0;
@@ -291,12 +319,15 @@ nav a.active {
 
 /* Couple Names in Nav */
 nav .couple-names {
-  font-family: var(--font-heading);
+  font-family: var(--font-accent) !important;
+  /* Caveat — matches hero names */
   font-size: 1.8rem;
-  color: var(--primary-color);
+  color: var(--primary-color) !important;
   text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: 0.3px;
   padding: 0 20px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 nav .couple-names::after {
@@ -316,7 +347,7 @@ nav .couple-names::after {
 
 .lang-btn {
   background: none;
-  border: 1px solid rgba(139, 115, 85, 0.3);
+  border: 1px solid rgba(196, 112, 74, 0.3);
   color: var(--text-light);
   padding: 4px 10px;
   border-radius: 20px;
@@ -334,7 +365,7 @@ nav .couple-names::after {
 }
 
 .lang-btn:hover:not(.active) {
-  background: rgba(139, 115, 85, 0.1);
+  background: rgba(196, 112, 74, 0.1);
 }
 
 /* Hamburger Menu (Mobile) */
@@ -462,8 +493,11 @@ nav .couple-names::after {
   margin-bottom: 20px;
 }
 
+
+
+/* Hero couple names — handwritten Caveat, not the display heading font */
 .hero-names {
-  font-family: var(--font-heading);
+  font-family: var(--font-accent);
   font-size: 5.5rem;
   color: white !important;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
@@ -512,7 +546,7 @@ nav .couple-names::after {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(139, 115, 85, 0.95);
+  background: rgba(196, 112, 74, 0.95);
   z-index: 2000;
   display: -webkit-flex;
   display: flex;
@@ -552,14 +586,145 @@ nav .couple-names::after {
   margin-bottom: 30px;
 }
 
+/* ============================================
+   PAGE HEADER BAND — shared by all interior pages
+   Same structure every time: eyebrow → h1 → torn-paper edge
+   ============================================ */
+.page-header {
+  position: relative;
+  background: linear-gradient(150deg, #C4704A 0%, #9E4F2E 100%);
+  text-align: center;
+  padding: 130px 20px 70px;
+  overflow: hidden;
+  /* subtle paper grain inside the header too */
+  background-image:
+    linear-gradient(150deg, #C4704A 0%, #9E4F2E 100%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0px, rgba(255, 255, 255, 0.04) 1px, transparent 1px, transparent 5px);
+  background-blend-mode: normal;
+}
+
+/* Torn paper edge at the bottom of the header */
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: -20px;
+  right: -20px;
+  height: 24px;
+  background: var(--bg-color);
+  transform: rotate(-0.4deg);
+  box-shadow: 0 -6px 14px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+/* Washi tape decorations that sit across the top edge of the header */
+.ph-tape {
+  position: absolute;
+  width: 80px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+  top: 0;
+}
+
+.ph-tape-left {
+  left: 12%;
+  transform: rotate(-2deg) translateY(-40%);
+}
+
+.ph-tape-right {
+  right: 12%;
+  transform: rotate(2.5deg) translateY(-40%);
+}
+
+/* Small eyebrow above the page title */
+.ph-eyebrow {
+  font-family: var(--font-accent);
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.82);
+  display: block;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* The main page title inside the header */
+.ph-title {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: white;
+  text-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+  line-height: 1.1;
+  margin: 0;
+  font-weight: 400;
+  /* Neucha looks better at normal weight */
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: 110px 20px 55px;
+  }
+
+  .ph-title {
+    font-size: 2.6rem;
+  }
+
+  .ph-eyebrow {
+    font-size: 1rem;
+  }
+
+  .ph-tape {
+    width: 55px;
+  }
+}
+
+/* ============================================
+   SECTION DIVIDER — decorative line motif
+   Used between major sections on the home page
+   ============================================ */
+.section-divider {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 40px;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  -webkit-flex: 1;
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--primary-color));
+  opacity: 0.45;
+}
+
+.section-divider::after {
+  background: linear-gradient(to left, transparent, var(--primary-color));
+}
+
+.section-divider-icon {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  opacity: 0.65;
+  letter-spacing: 4px;
+}
+
 /* --- Timeline Section --- */
 .timeline-section {
   padding: 120px 20px;
   position: relative;
-  background-image: radial-gradient(rgba(139, 115, 85, 0.1) 1.5px, transparent 1.5px);
-  background-size: 30px 30px;
-  opacity: 1;
-  /* contain prevents layout/style recalcs in this section bleeding out */
+  /* Soft paper-like gradient — cream at top, warm terracotta blush at bottom */
+  background: linear-gradient(180deg,
+      #FBF7F0 0%,
+      #F5EDE0 40%,
+      #EFE0CE 80%,
+      #E8D3BE 100%);
   contain: layout style;
 }
 
@@ -577,8 +742,13 @@ nav .couple-names::after {
   margin-bottom: 15px;
 }
 
-.timeline-header h1 {
+/* .timeline-section-title replaces the old h1 inside .timeline-header */
+.timeline-header h1,
+.timeline-section-title {
   font-size: 4rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-color);
 }
 
 .timeline {
@@ -653,7 +823,7 @@ nav .couple-names::after {
 .timeline-item:hover::after {
   background-color: var(--primary-color);
   transform: translateY(-50%) scale(1.3);
-  box-shadow: 0 0 15px rgba(139, 115, 85, 0.4);
+  box-shadow: 0 0 15px rgba(196, 112, 74, 0.4);
 }
 
 .timeline-content {
@@ -836,9 +1006,6 @@ footer {
   line-height: 1.25em;
   vertical-align: bottom;
   position: relative;
-  /* Fade/Blur effect for top and bottom */
-  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
 }
 
 .counter-digit-group {
