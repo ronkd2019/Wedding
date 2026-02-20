@@ -103,9 +103,11 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: none;
+    /* Use outline-offset instead of removing outline — keep keyboard focus visible */
+    outline: 2px solid var(--primary-color);
+    outline-offset: 0;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+    box-shadow: 0 0 0 4px rgba(139, 115, 85, 0.12);
 }
 
 .form-group small {

@@ -4,24 +4,29 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Leave a heartfelt message for Oleksandra & Dmytro in their digital wedding guestbook." />
     <title>Guestbook - Oleksandra &amp; Dmytro 🎂</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/guestbook.css" />
 </head>
 
 <body>
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Corkboard Background -->
-    <div class="corkboard-texture"></div>
+    <div class="corkboard-texture" aria-hidden="true"></div>
 
     <!-- Navigation -->
-    <nav>
-        <div class="lang-switcher">
-            <button class="lang-btn" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="ua">UA</button>
+    <nav aria-label="Main navigation">
+        <div class="lang-switcher" role="group" aria-label="Language switcher">
+            <button class="lang-btn" data-lang="en" aria-label="Switch to English" aria-pressed="false">EN</button>
+            <button class="lang-btn" data-lang="ua" aria-label="Перейти на українську" aria-pressed="false">UA</button>
         </div>
         <ul>
             <li><a href="../index.html" data-i18n="nav-home">Home</a></li>
-            <li><a href="../index.html" class="couple-names">Oleksandra &amp; Dmytro</a></li>
+            <li><a href="../index.html" class="couple-names" aria-label="Back to home">Oleksandra &amp; Dmytro</a></li>
             <li><a href="./guests.html" data-i18n="nav-guests">Guests</a></li>
             <li><a href="./highlights.html" data-i18n="nav-highlights">Highlights</a></li>
             <li><a href="./guestbook.html" data-i18n="nav-wishes">Leave a Wish</a></li>
@@ -29,38 +34,45 @@
         </ul>
     </nav>
 
-    <div
-        style="margin-top: 120px; text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px;">
-        <h1 class="page-title" data-i18n="guestbook-title">Leave a Message</h1>
-        <button id="addNoteBtn" class="nav-pin primary" data-i18n="btn-add-note">Write a Note ✏️</button>
-    </div>
+    <main id="main-content">
+        <div
+            style="padding-top: 120px; text-align: center; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <h1 class="page-title" data-i18n="guestbook-title">Leave a Message</h1>
+            <button id="addNoteBtn" class="nav-pin primary" data-i18n="btn-add-note" aria-haspopup="dialog">Write a Note
+                ✏️</button>
+        </div>
 
-    <!-- Messages Board -->
-    <div class="board-container" id="board">
-        <!-- Notes will be injected here -->
-    </div>
+        <!-- Messages Board -->
+        <div class="board-container" id="board" aria-live="polite" aria-label="Guest messages">
+            <!-- Notes injected here -->
+        </div>
+    </main>
 
     <!-- Add Note Modal -->
-    <div id="noteModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="noteModalTitle">
+    <div id="noteModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="noteModalTitle" hidden>
         <div class="modal-content">
-            <span class="close-modal" role="button" aria-label="Close">&times;</span>
+            <button class="close-modal" aria-label="Close write a note dialog">&times;</button>
             <h2 id="noteModalTitle" data-i18n="modal-title">Write your wish</h2>
             <form id="noteForm">
                 <div class="form-group">
                     <label for="guestName" data-i18n="label-name">Your Name</label>
-                    <input type="text" id="guestName" required maxlength="30">
+                    <input type="text" id="guestName" name="guestName" required maxlength="30" autocomplete="name">
                 </div>
                 <div class="form-group">
                     <label for="guestMessage" data-i18n="label-message">Message</label>
-                    <textarea id="guestMessage" required maxlength="150" rows="4"></textarea>
+                    <textarea id="guestMessage" name="guestMessage" required maxlength="150" rows="4"></textarea>
                 </div>
                 <div class="color-picker">
                     <label data-i18n="label-color">Pick a color:</label>
-                    <div class="colors">
-                        <div class="color-option selected" data-color="yellow" style="background:#fff740"></div>
-                        <div class="color-option" data-color="pink" style="background:#ff7eb9"></div>
-                        <div class="color-option" data-color="green" style="background:#7afcff"></div>
-                        <div class="color-option" data-color="blue" style="background:#aeebff"></div>
+                    <div class="colors" role="radiogroup" aria-label="Note colour">
+                        <div class="color-option selected" data-color="yellow" style="background:#fff740" role="radio"
+                            aria-checked="true" aria-label="Yellow" tabindex="0"></div>
+                        <div class="color-option" data-color="pink" style="background:#ff7eb9" role="radio"
+                            aria-checked="false" aria-label="Pink" tabindex="0"></div>
+                        <div class="color-option" data-color="green" style="background:#7afcff" role="radio"
+                            aria-checked="false" aria-label="Teal" tabindex="0"></div>
+                        <div class="color-option" data-color="blue" style="background:#aeebff" role="radio"
+                            aria-checked="false" aria-label="Blue" tabindex="0"></div>
                     </div>
                 </div>
                 <button type="submit" class="submit-btn" data-i18n="btn-post">Post It!</button>
@@ -69,14 +81,14 @@
     </div>
 
     <!-- Admin Login Modal -->
-    <div id="adminModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
+    <div id="adminModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle" hidden>
         <div class="modal-content small">
-            <span class="close-modal" id="closeAdmin" role="button" aria-label="Close">&times;</span>
+            <button class="close-modal" id="closeAdmin" aria-label="Close admin login dialog">&times;</button>
             <h2 id="adminModalTitle" data-i18n="admin-title">Admin Login</h2>
             <form id="adminForm">
                 <div class="form-group">
                     <label for="adminPass" data-i18n="label-password">Password</label>
-                    <input type="password" id="adminPass" required>
+                    <input type="password" id="adminPass" name="adminPass" required autocomplete="current-password">
                 </div>
                 <button type="submit" class="submit-btn" data-i18n="btn-login">Login</button>
             </form>
@@ -84,23 +96,21 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div id="confirmDeleteModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+    <div id="confirmDeleteModal" class="modal" role="alertdialog" aria-modal="true" aria-labelledby="deleteModalTitle"
+        aria-describedby="deleteModalDesc" hidden>
         <div class="modal-content small">
-            <span class="close-modal" id="closeConfirmDelete" role="button" aria-label="Close">&times;</span>
+            <button class="close-modal" id="closeConfirmDelete" aria-label="Cancel and close">&times;</button>
             <h2 id="deleteModalTitle" data-i18n="confirm-delete-title"
-                style="font-family: var(--font-heading); color: var(--primary-color);">
-                Delete Note?</h2>
-            <p data-i18n="confirm-delete-text"
+                style="font-family: var(--font-heading); color: var(--primary-color);">Delete Note?</h2>
+            <p id="deleteModalDesc" data-i18n="confirm-delete-text"
                 style="font-family: var(--font-body); color: var(--text-color); margin-bottom: 20px;">Are you sure you
-                want to
-                remove this message? This cannot be undone.</p>
+                want to remove this message? This cannot be undone.</p>
 
             <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
                 <input type="checkbox" id="dontAskAgain" style="width: auto; accent-color: var(--primary-color);">
                 <label for="dontAskAgain" data-i18n="label-dont-ask"
                     style="font-family: var(--font-body); font-size: 0.9rem; margin: 0; font-weight: 400; color: var(--text-color);">Do
-                    not
-                    show again</label>
+                    not show again</label>
             </div>
 
             <div style="display: flex; gap: 15px;">
@@ -114,7 +124,7 @@
 
     <!-- Footer -->
     <footer style="margin-top: auto;">
-        <div class="footer-nav">
+        <div class="footer-nav" aria-label="Footer navigation">
             <a href="../index.html" data-i18n="nav-home">Home</a>
             <a href="guests.html" data-i18n="nav-guests">Guests</a>
             <a href="highlights.html" data-i18n="nav-highlights">Highlights</a>
@@ -124,11 +134,11 @@
         <p>Oleksandra &amp; Dmytro • October 2024</p>
         <div class="footer-credit">
             <span data-i18n="footer-by">Website by</span>
-            <a href="https://instagram.com/dnlkxx" target="_blank">Daniil</a>
+            <a href="https://instagram.com/dnlkxx" target="_blank" rel="noopener noreferrer">Daniil</a>
             | <span data-i18n="footer-made">Made with</span> ♡
         </div>
-        <!-- Admin Trigger (Hidden - click the ring to access admin) -->
-        <div class="admin-trigger" id="adminTrigger" title="Admin access" aria-label="Admin access">💍</div>
+        <!-- Admin Trigger: visually hidden, keyboard & mouse accessible -->
+        <button class="admin-trigger" id="adminTrigger" aria-label="Admin access" title="Admin access">💍</button>
     </footer>
 
     <!-- Firebase SDK (Compat) -->

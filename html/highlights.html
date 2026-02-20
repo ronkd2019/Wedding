@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Wedding highlights from Oleksandra & Dmytro's beautiful October 2024 ceremony – photos, first dance and favourite moments." />
     <title>Highlights - Oleksandra &amp; Dmytro 🎂</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/guests.css" />
@@ -11,18 +13,21 @@
 </head>
 
 <body>
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Corkboard Background -->
-    <div class="corkboard-texture"></div>
+    <div class="corkboard-texture" aria-hidden="true"></div>
 
     <!-- Navigation -->
-    <nav>
-        <div class="lang-switcher">
-            <button class="lang-btn" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="ua">UA</button>
+    <nav aria-label="Main navigation">
+        <div class="lang-switcher" role="group" aria-label="Language switcher">
+            <button class="lang-btn" data-lang="en" aria-label="Switch to English" aria-pressed="false">EN</button>
+            <button class="lang-btn" data-lang="ua" aria-label="Перейти на українську" aria-pressed="false">UA</button>
         </div>
         <ul>
             <li><a href="../index.html" data-i18n="nav-home">Home</a></li>
-            <li><a href="../index.html" class="couple-names">Oleksandra &amp; Dmytro</a></li>
+            <li><a href="../index.html" class="couple-names" aria-label="Back to home">Oleksandra &amp; Dmytro</a></li>
             <li><a href="./guests.html" data-i18n="nav-guests">Guests</a></li>
             <li><a href="./highlights.html" data-i18n="nav-highlights">Highlights</a></li>
             <li><a href="./guestbook.html" data-i18n="nav-wishes">Leave a Wish</a></li>
@@ -30,85 +35,82 @@
         </ul>
     </nav>
 
-    <div style="margin-top: 120px; text-align: center; position: relative; z-index: 1;">
-        <h1 class="page-title" data-i18n="highlight-title">Wedding Highlights</h1>
-    </div>
-
-    <!-- Gallery Container -->
-    <div class="highlight-grid">
-        <!-- Item 1 -->
-        <div class="highlight-item" style="--rotation: 2deg">
-            <div class="tape" style="--tape-rotation: -3deg"></div>
-            <div class="corner-decoration"></div>
-            <img src="../images/wedding-hero.jpg" alt="Ceremony" class="highlight-photo">
-            <div class="highlight-caption" data-i18n="caption-ceremony">The Ceremony</div>
+    <main id="main-content">
+        <div style="padding-top: 120px; text-align: center; position: relative; z-index: 1;">
+            <h1 class="page-title" data-i18n="highlight-title">Wedding Highlights</h1>
         </div>
 
-        <!-- Item 2 -->
-        <div class="highlight-item" style="--rotation: -3deg">
-            <div class="tape" style="--tape-rotation: 2deg"></div>
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600" alt="First Dance"
-                class="highlight-photo">
-            <div class="highlight-caption" data-i18n="caption-dance">First Dance</div>
-        </div>
+        <!-- Gallery Container -->
+        <section class="highlight-grid" aria-label="Wedding photo highlights">
+            <article class="highlight-item" style="--rotation: 2deg">
+                <div class="tape" aria-hidden="true" style="--tape-rotation: -3deg"></div>
+                <div class="corner-decoration" aria-hidden="true"></div>
+                <img src="../images/wedding-hero.jpg" alt="The ceremony – Oleksandra and Dmytro exchanging vows"
+                    class="highlight-photo">
+                <p class="highlight-caption" data-i18n="caption-ceremony">The Ceremony</p>
+            </article>
 
-        <!-- Item 3 -->
-        <div class="highlight-item" style="--rotation: 1deg">
-            <div class="tape" style="--tape-rotation: -1deg"></div>
-            <div class="corner-decoration"></div>
-            <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?w=600" alt="Cake Cutting"
-                class="highlight-photo">
-            <div class="highlight-caption" data-i18n="caption-sweet">Sweet Moments</div>
-        </div>
+            <article class="highlight-item" style="--rotation: -3deg">
+                <div class="tape" aria-hidden="true" style="--tape-rotation: 2deg"></div>
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600"
+                    alt="The couple sharing their first dance" class="highlight-photo">
+                <p class="highlight-caption" data-i18n="caption-dance">First Dance</p>
+            </article>
 
-        <!-- Item 4 -->
-        <div class="highlight-item" style="--rotation: -2deg">
-            <div class="tape" style="--tape-rotation: 4deg"></div>
-            <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?w=600" alt="Party"
-                class="highlight-photo">
-            <div class="highlight-caption" data-i18n="caption-party">Party Time!</div>
-        </div>
+            <article class="highlight-item" style="--rotation: 1deg">
+                <div class="tape" aria-hidden="true" style="--tape-rotation: -1deg"></div>
+                <div class="corner-decoration" aria-hidden="true"></div>
+                <img src="https://images.unsplash.com/photo-1511285560982-1351cdeb9821?w=600"
+                    alt="Sweet moment – cutting the wedding cake" class="highlight-photo">
+                <p class="highlight-caption" data-i18n="caption-sweet">Sweet Moments</p>
+            </article>
 
-        <!-- Item 5 -->
-        <div class="highlight-item" style="--rotation: 3deg">
-            <div class="tape" style="--tape-rotation: -2deg"></div>
-            <div class="corner-decoration"></div>
-            <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?w=600" alt="Friends"
-                class="highlight-photo">
-            <div class="highlight-caption" data-i18n="caption-friends">Friends &amp; Family</div>
-        </div>
+            <article class="highlight-item" style="--rotation: -2deg">
+                <div class="tape" aria-hidden="true" style="--tape-rotation: 4deg"></div>
+                <img src="https://images.unsplash.com/photo-1520854221256-17451cc330e7?w=600"
+                    alt="Guests celebrating and dancing at the reception" class="highlight-photo">
+                <p class="highlight-caption" data-i18n="caption-party">Party Time!</p>
+            </article>
 
-        <!-- Item 6 -->
-        <div class="highlight-item" style="--rotation: -1deg">
-            <div class="tape" style="--tape-rotation: 1deg"></div>
-            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600" alt="Just Married"
-                class="highlight-photo">
-            <div class="highlight-caption" data-i18n="caption-married">Just Married</div>
-        </div>
-    </div>
+            <article class="highlight-item" style="--rotation: 3deg">
+                <div class="tape" aria-hidden="true" style="--tape-rotation: -2deg"></div>
+                <div class="corner-decoration" aria-hidden="true"></div>
+                <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?w=600"
+                    alt="Friends and family gathered together at the wedding" class="highlight-photo">
+                <p class="highlight-caption" data-i18n="caption-friends">Friends &amp; Family</p>
+            </article>
 
-    <!-- Spotify Playlist Section -->
-    <div class="playlist-section">
-        <h2 class="playlist-title" data-i18n="playlist-title">Our Wedding Vibe 🎵</h2>
-        <div class="playlist-container">
-            <div class="playlist-tape"></div>
-            <iframe style="border-radius:12px"
-                src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTHQX9d3d3s2?utm_source=generator&theme=0"
-                width="100%" height="352" frameBorder="0" allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"></iframe>
-        </div>
-    </div>
+            <article class="highlight-item" style="--rotation: -1deg">
+                <div class="tape" aria-hidden="true" style="--tape-rotation: 1deg"></div>
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600"
+                    alt="Just married – the couple celebrating their union" class="highlight-photo">
+                <p class="highlight-caption" data-i18n="caption-married">Just Married</p>
+            </article>
+        </section>
 
-    <!-- Note -->
-    <div class="sticky-note">
-        <p data-i18n="highlights-note">Best day of our lives!</p>
-        <div class="note-pin"></div>
-    </div>
+        <!-- Spotify Playlist Section -->
+        <section class="playlist-section" aria-labelledby="playlist-heading">
+            <h2 id="playlist-heading" class="playlist-title" data-i18n="playlist-title">Our Wedding Vibe 🎵</h2>
+            <div class="playlist-container">
+                <div class="playlist-tape" aria-hidden="true"></div>
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTHQX9d3d3s2?utm_source=generator&theme=0"
+                    width="100%" height="352" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    title="Our Wedding Playlist on Spotify" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <!-- Note -->
+        <div class="sticky-note" aria-hidden="true">
+            <p data-i18n="highlights-note">Best day of our lives!</p>
+            <div class="note-pin"></div>
+        </div>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-nav">
+        <div class="footer-nav" aria-label="Footer navigation">
             <a href="../index.html" data-i18n="nav-home">Home</a>
             <a href="./guests.html" data-i18n="nav-guests">Guests</a>
             <a href="./highlights.html" data-i18n="nav-highlights">Highlights</a>
@@ -118,7 +120,7 @@
         <p>Oleksandra &amp; Dmytro • October 2024</p>
         <div class="footer-credit">
             <span data-i18n="footer-by">Website by</span>
-            <a href="https://instagram.com/dnlkxx" target="_blank">Daniil</a>
+            <a href="https://instagram.com/dnlkxx" target="_blank" rel="noopener noreferrer">Daniil</a>
             | <span data-i18n="footer-made">Made with</span> ♡
         </div>
     </footer>

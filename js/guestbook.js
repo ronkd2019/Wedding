@@ -1,7 +1,7 @@
 /**
  * Guestbook Logic
- * Maintains a list of sticky notes in LocalStorage (for demo)
- * and handles UI rendering + Admin capabilities.
+ * Maintains sticky notes in Firebase Firestore with fallback to LocalStorage.
+ * Includes full keyboard accessibility: focus trapping, Escape to close, auto-focus.
  */
 
 /* --- CONFIGURATION --- */
@@ -26,26 +26,110 @@ const AppState = {
 try {
     firebase.initializeApp(firebaseConfig);
     AppState.db = firebase.firestore();
-    console.log("Firebase initialized");
 } catch (e) {
     console.error("Firebase initialization failed:", e);
-    console.warn("Using LocalStorage fallback due to error.");
 }
 
 // Admin Password (Client-side simple check)
 const ADMIN_PASS = "wedding2024";
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Check if running in Admin Mode (persisted)
-    if (sessionStorage.getItem('guestbook_admin') === 'true') {
-        AppState.isAdmin = true;
-        document.body.classList.add('admin-mode'); // Shows delete buttons
+/* ============================================
+   ACCESSIBILITY HELPERS
+   ============================================ */
+
+/**
+ * Trap focus inside a modal while it is open.
+ * Returns a cleanup function that removes the listener.
+ */
+function trapFocus(modal) {
+    const focusableSelectors = [
+        'button:not([disabled])',
+        '[href]',
+        'input:not([disabled])',
+        'textarea:not([disabled])',
+        'select:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])',
+        '[role="radio"]'
+    ].join(', ');
+
+    const focusable = Array.from(modal.querySelectorAll(focusableSelectors));
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    function handleTab(e) {
+        if (e.key !== 'Tab') return;
+        if (focusable.length === 0) { e.preventDefault(); return; }
+
+        if (e.shiftKey) {
+            if (document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
     }
 
-    // Load Messages
-    loadMessages();
+    modal.addEventListener('keydown', handleTab);
 
-    // Event Listeners
+    // Auto-focus the first focusable element (heading or first input)
+    const firstInput = modal.querySelector('input, textarea, button.close-modal');
+    if (firstInput) firstInput.focus();
+
+    return () => modal.removeEventListener('keydown', handleTab);
+}
+
+/**
+ * Open a modal: remove hidden, trap focus, add Escape listener.
+ * Returns a close function that reverses everything.
+ */
+function openModal(modal, triggerElement) {
+    const previouslyFocused = triggerElement || document.activeElement;
+
+    modal.removeAttribute('hidden');
+    modal.style.display = 'block';
+
+    const removeTrap = trapFocus(modal);
+
+    function onEscape(e) {
+        if (e.key === 'Escape') closeModal();
+    }
+    document.addEventListener('keydown', onEscape);
+
+    function onBackdropClick(e) {
+        if (e.target === modal) closeModal();
+    }
+    modal.addEventListener('click', onBackdropClick);
+
+    function closeModal() {
+        modal.style.display = 'none';
+        modal.setAttribute('hidden', '');
+        removeTrap();
+        document.removeEventListener('keydown', onEscape);
+        modal.removeEventListener('click', onBackdropClick);
+        // Return focus to the element that triggered the modal
+        if (previouslyFocused && previouslyFocused.focus) {
+            previouslyFocused.focus();
+        }
+    }
+
+    return closeModal;
+}
+
+/* ============================================
+   INITIALISATION
+   ============================================ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem('guestbook_admin') === 'true') {
+        AppState.isAdmin = true;
+        document.body.classList.add('admin-mode');
+    }
+
+    loadMessages();
     setupModalListeners();
     setupAdminListeners();
 });
@@ -53,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
 /* --- STORAGE SERVICE --- */
 function loadMessages() {
     if (AppState.db) {
-        // Real-time Firestore Listener
         AppState.db.collection("messages").orderBy("date", "desc")
             .onSnapshot((snapshot) => {
                 AppState.messages = snapshot.docs.map(doc => ({
@@ -65,7 +148,6 @@ function loadMessages() {
                 console.error("Error loading messages:", error);
             });
     } else {
-        // Fallback: LocalStorage
         const stored = localStorage.getItem('wedding_guestbook_messages');
         if (stored) {
             AppState.messages = JSON.parse(stored);
@@ -73,7 +155,6 @@ function loadMessages() {
             AppState.messages = [
                 { id: "demo1", name: "Oleksandra & Dmytro", text: "Welcome to our guestbook! Leave us a note! ❤️", color: "pink", date: Date.now() }
             ];
-            // Save initial demo message
             localStorage.setItem('wedding_guestbook_messages', JSON.stringify(AppState.messages));
         }
         renderBoard();
@@ -82,20 +163,15 @@ function loadMessages() {
 
 function saveMessage(msg) {
     if (AppState.db) {
-        // Save to Firestore
         AppState.db.collection("messages").add({
             name: msg.name,
             text: msg.text,
             color: msg.color,
             date: msg.date
-        }).then(() => {
-            console.log("Message saved!");
         }).catch((error) => {
             console.error("Error saving message:", error);
-            alert("Could not save message. Check console.");
         });
     } else {
-        // Save to LocalStorage
         AppState.messages.push(msg);
         localStorage.setItem('wedding_guestbook_messages', JSON.stringify(AppState.messages));
         renderBoard();
@@ -105,71 +181,52 @@ function saveMessage(msg) {
 function deleteMessage(id) {
     if (!AppState.isAdmin) return;
 
-    // Check if user has opted out of confirmation
     const dontAsk = localStorage.getItem('wedding_guestbook_dont_ask_delete');
     if (dontAsk === 'true') {
         performDelete(id);
         return;
     }
 
-    // Show Confirmation Modal
     const modal = document.getElementById('confirmDeleteModal');
     const confirmBtn = document.getElementById('confirmDelete');
     const cancelBtn = document.getElementById('cancelDelete');
     const dontAskCheckbox = document.getElementById('dontAskAgain');
+    const closeXBtn = document.getElementById('closeConfirmDelete');
 
-    modal.style.display = 'block';
-
-    // Reset checkbox
     dontAskCheckbox.checked = false;
 
-    // Handle Confirm
+    const closeModal = openModal(modal, document.activeElement);
+
     const onConfirm = () => {
         if (dontAskCheckbox.checked) {
             localStorage.setItem('wedding_guestbook_dont_ask_delete', 'true');
         }
         performDelete(id);
+        cleanup();
         closeModal();
     };
 
-    // Handle Cancel
     const onCancel = () => {
+        cleanup();
         closeModal();
     };
 
-    // Cleanup and Close Helper
-    const closeModal = () => {
-        modal.style.display = 'none';
+    function cleanup() {
         confirmBtn.removeEventListener('click', onConfirm);
         cancelBtn.removeEventListener('click', onCancel);
-    };
+        if (closeXBtn) closeXBtn.removeEventListener('click', onCancel);
+    }
 
     confirmBtn.addEventListener('click', onConfirm);
     cancelBtn.addEventListener('click', onCancel);
-
-    // Close ×
-    const closeXBtn = document.getElementById('closeConfirmDelete');
-    if (closeXBtn) closeXBtn.onclick = closeModal;
-
-    // Close on click outside
-    window.onclick = (event) => {
-        if (event.target === modal) {
-            closeModal();
-        }
-    };
+    if (closeXBtn) closeXBtn.addEventListener('click', onCancel);
 }
 
 function performDelete(id) {
     if (AppState.db) {
-        // Delete from Firestore
         AppState.db.collection("messages").doc(id).delete()
-            .then(() => {
-                console.log("Message deleted!");
-            }).catch((error) => {
-                console.error("Error deleting:", error);
-            });
+            .catch((error) => console.error("Error deleting:", error));
     } else {
-        // Delete from LocalStorage
         AppState.messages = AppState.messages.filter(m => String(m.id) !== String(id));
         localStorage.setItem('wedding_guestbook_messages', JSON.stringify(AppState.messages));
         renderBoard();
@@ -181,20 +238,18 @@ function renderBoard() {
     const board = document.getElementById('board');
     board.innerHTML = '';
 
-    // Sort by newest first
     const sorted = [...AppState.messages].sort((a, b) => b.date - a.date);
 
     sorted.forEach((msg) => {
         const note = document.createElement('div');
         note.className = `sticky-note ${msg.color || 'yellow'}`;
 
-        // Random slight rotation using date as seed (stable)
         const rotation = (msg.date % 10 - 5);
-        note.style.transform = `rotate(${rotation}deg)`;
+        note.style.transform = `rotate(${rotation}deg) translateZ(0)`;
 
         note.innerHTML = `
-            <div class="pin"></div>
-            ${AppState.isAdmin ? `<button class="delete-btn" onclick="deleteMessage('${msg.id}')">✕</button>` : ''}
+            <div class="pin" aria-hidden="true"></div>
+            ${AppState.isAdmin ? `<button class="delete-btn" onclick="deleteMessage('${msg.id}')" aria-label="Delete note from ${escapeHtml(msg.name)}">✕</button>` : ''}
             <div class="note-content">${escapeHtml(msg.text)}</div>
             <div class="note-author">- ${escapeHtml(msg.name)}</div>
         `;
@@ -216,61 +271,75 @@ function escapeHtml(text) {
 function setupModalListeners() {
     const modal = document.getElementById('noteModal');
     const addBtn = document.getElementById('addNoteBtn');
-    const closeBtn = document.querySelector('.close-modal');
+    const closeBtn = modal.querySelector('.close-modal');
     const form = document.getElementById('noteForm');
     const colorOptions = document.querySelectorAll('.color-option');
 
-    // Open
+    let closeModal = null;
+
     addBtn.addEventListener('click', () => {
-        modal.style.display = 'block';
+        closeModal = openModal(modal, addBtn);
     });
 
-    // Close
     closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
+        if (closeModal) { closeModal(); closeModal = null; }
         form.reset();
+        resetColorPicker();
     });
 
-    // Color Selection
+    // Color Selection (keyboard + mouse)
     let selectedColor = 'yellow';
+
+    function selectColor(opt) {
+        colorOptions.forEach(o => {
+            o.classList.remove('selected');
+            o.setAttribute('aria-checked', 'false');
+        });
+        opt.classList.add('selected');
+        opt.setAttribute('aria-checked', 'true');
+        selectedColor = opt.getAttribute('data-color');
+    }
+
+    function resetColorPicker() {
+        selectedColor = 'yellow';
+        colorOptions.forEach((o, i) => {
+            const isFirst = i === 0;
+            o.classList.toggle('selected', isFirst);
+            o.setAttribute('aria-checked', isFirst ? 'true' : 'false');
+        });
+    }
+
     colorOptions.forEach(opt => {
-        opt.addEventListener('click', () => {
-            // Remove active class from all
-            colorOptions.forEach(o => o.classList.remove('selected'));
-            // Add to clicked
-            opt.classList.add('selected');
-            selectedColor = opt.getAttribute('data-color');
+        opt.addEventListener('click', () => selectColor(opt));
+        // Keyboard: Enter or Space to select a colour swatch
+        opt.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectColor(opt);
+            }
         });
     });
 
-    // Submit
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const name = document.getElementById('guestName').value;
-        const text = document.getElementById('guestMessage').value;
+        const name = document.getElementById('guestName').value.trim();
+        const text = document.getElementById('guestMessage').value.trim();
 
         if (name && text) {
             const newMessage = {
-                id: Date.now(), // Simple unique ID
-                name: name,
-                text: text,
+                id: Date.now(),
+                name,
+                text,
                 color: selectedColor,
                 date: Date.now()
             };
 
             saveMessage(newMessage);
 
-            // Close and reset
-            modal.style.display = 'none';
+            if (closeModal) { closeModal(); closeModal = null; }
             form.reset();
-        }
-    });
-
-    // Close on click outside
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
+            resetColorPicker();
         }
     });
 }
@@ -281,23 +350,23 @@ function setupAdminListeners() {
     const closeBtn = document.getElementById('closeAdmin');
     const form = document.getElementById('adminForm');
 
-    // Secret Trigger (Pi symbol in footer)
+    let closeModal = null;
+
     trigger.addEventListener('click', () => {
         if (AppState.isAdmin) {
-            // Already logged in, maybe logout?
-            if (confirm("Logout admin?")) {
+            if (window.confirm("Logout admin?")) {
                 AppState.isAdmin = false;
                 sessionStorage.removeItem('guestbook_admin');
                 document.body.classList.remove('admin-mode');
                 renderBoard();
             }
         } else {
-            modal.style.display = 'block';
+            closeModal = openModal(modal, trigger);
         }
     });
 
     closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
+        if (closeModal) { closeModal(); closeModal = null; }
     });
 
     form.addEventListener('submit', (e) => {
@@ -309,28 +378,27 @@ function setupAdminListeners() {
             sessionStorage.setItem('guestbook_admin', 'true');
             document.body.classList.add('admin-mode');
             renderBoard();
-            modal.style.display = 'none';
-            // Show a small in-page toast instead of alert()
+            if (closeModal) { closeModal(); closeModal = null; }
+
             const toast = document.createElement('div');
             toast.textContent = '✓ Admin mode activated';
+            toast.setAttribute('role', 'status');
             toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--primary-color);color:white;padding:12px 24px;border-radius:50px;font-size:0.95rem;z-index:9999;box-shadow:0 4px 15px rgba(0,0,0,0.2);';
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         } else {
             const passField = document.getElementById('adminPass');
             passField.style.borderColor = '#e74c3c';
-            setTimeout(() => passField.style.borderColor = '', 2000);
+            passField.setAttribute('aria-invalid', 'true');
+            passField.focus();
+            setTimeout(() => {
+                passField.style.borderColor = '';
+                passField.removeAttribute('aria-invalid');
+            }, 2000);
         }
         form.reset();
     });
-
-    // Close on click outside
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
 }
 
-// Make delete available globally
+// Make delete available globally (called from inline onclick in renderBoard)
 window.deleteMessage = deleteMessage;

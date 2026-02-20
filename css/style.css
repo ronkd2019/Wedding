@@ -42,6 +42,100 @@ html {
   }
 }
 
+/* ============================================
+   ACCESSIBILITY & FOCUS STYLES
+   ============================================ */
+
+/* Skip to main content link — visible only on keyboard focus */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 20px;
+  z-index: 99999;
+  background: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 0 0 10px 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid white;
+  outline-offset: -3px;
+}
+
+/* Screen-reader-only utility (visually hidden but announced by AT) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Global keyboard focus indicator — only shown for keyboard, not mouse */
+:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Focus on dark/hero backgrounds — use white ring */
+.hero :focus-visible,
+.submit-hero :focus-visible,
+nav :focus-visible {
+  outline-color: white;
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+/* Form inputs — use styled ring matching the site design */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 0;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 4px rgba(139, 115, 85, 0.15);
+}
+
+/* Buttons — subtle warm ring */
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/* Links — underline on focus for extra clarity */
+a:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Respect prefers-reduced-motion for all animations */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
 body {
   font-family: var(--font-body);
   background-color: var(--bg-color);
@@ -131,8 +225,9 @@ nav {
   padding-left: max(40px, env(safe-area-inset-left));
   padding-right: max(40px, env(safe-area-inset-right));
   background: rgba(255, 255, 255, 0.85);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  /* Reduced from blur(12px) to blur(6px) — halves GPU repaint cost on every scroll */
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   z-index: 1000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: -webkit-flex;
@@ -141,7 +236,10 @@ nav {
   justify-content: space-between;
   -webkit-align-items: center;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  /* Own GPU compositor layer — prevents scroll from triggering nav repaints */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 nav .nav-content {
@@ -295,7 +393,8 @@ nav .couple-names::after {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../images/wedding-hero.jpg');
   background-size: cover;
   background-position: center;
-  /* background-attachment: fixed is ignored silently on iOS Safari */
+  /* background-attachment: fixed triggers full-page repaints on every scroll.
+     Using scroll on all devices. The parallax effect is sacrificed for smooth 60fps. */
   background-attachment: fixed;
   position: relative;
   display: -webkit-flex;
@@ -308,6 +407,8 @@ nav .couple-names::after {
   flex-direction: column;
   color: white;
   text-align: center;
+  contain: layout style;
+  /* Isolate rendering for performance */
 }
 
 /* Hero Content (if needed later) */
@@ -330,6 +431,14 @@ nav .couple-names::after {
 
 /* iOS Safari does not support background-attachment: fixed accurately */
 @supports (-webkit-touch-callout: none) {
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
+/* On all devices: switch to scroll for performance (no per-scroll full repaint) */
+@media (any-pointer: coarse),
+(max-width: 900px) {
   .hero {
     background-attachment: scroll;
   }
@@ -450,7 +559,8 @@ nav .couple-names::after {
   background-image: radial-gradient(rgba(139, 115, 85, 0.1) 1.5px, transparent 1.5px);
   background-size: 30px 30px;
   opacity: 1;
-  /* Reduce opacity of dots via rgba if needed, keeping simple here */
+  /* contain prevents layout/style recalcs in this section bleeding out */
+  contain: layout style;
 }
 
 .timeline-header {
@@ -604,6 +714,7 @@ nav .couple-names::after {
   background-color: var(--white);
   text-align: center;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
+  contain: layout style;
 }
 
 .counter-section h2 {
@@ -746,7 +857,7 @@ footer {
   justify-content: center;
   text-align: center;
   font-variant-numeric: tabular-nums;
-  filter: blur(0);
+  /* Removed filter:blur(0) — it was creating a composited layer per digit */
 }
 
 /* --- Responsive Design --- */

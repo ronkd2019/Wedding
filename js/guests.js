@@ -226,14 +226,14 @@ function createPolaroid(guest) {
         : guest.role;
 
     div.innerHTML = `
-        <div class="clothespin"></div>
+        <div class="clothespin" aria-hidden="true"></div>
         <div class="photo-frame">
             <img
                 src="${guest.image}"
-                alt="${guest.role}"
+                alt="${guest.name} – ${guest.role}"
                 class="polaroid-photo"
             />
-            <div class="polaroid-developing"></div>
+            <div class="polaroid-developing" aria-hidden="true"></div>
         </div>
         <div class="polaroid-caption">
             <p class="role" data-original-role="${guest.role}">${translatedRole}</p>
@@ -241,9 +241,24 @@ function createPolaroid(guest) {
         </div>
     `;
 
-    // Add click event to develop the photo
-    div.addEventListener('click', () => {
+    // Make card keyboard accessible
+    div.setAttribute('tabindex', '0');
+    div.setAttribute('role', 'figure');
+    div.setAttribute('aria-label', `${guest.name} – ${guest.role}`);
+
+    function develop() {
         div.classList.add('developed');
+    }
+
+    // Click to develop
+    div.addEventListener('click', develop);
+
+    // Keyboard: Enter or Space to develop
+    div.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            develop();
+        }
     });
 
     return div;

@@ -4,20 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oleksandra & Dmytro 🎂</title>
+  <meta name="description"
+    content="Oleksandra & Dmytro – Wedding Celebration, October 2024. Relive our story, meet our wonderful guests, and share your memories with us." />
+  <title>Oleksandra &amp; Dmytro 🎂</title>
   <link rel="stylesheet" href="./css/style.css" />
 </head>
 
 <body>
+  <!-- Skip Navigation (keyboard accessibility) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Navigation -->
-  <nav>
-    <div class="lang-switcher">
-      <button class="lang-btn" data-lang="en">EN</button>
-      <button class="lang-btn" data-lang="ua">UA</button>
+  <nav aria-label="Main navigation">
+    <div class="lang-switcher" role="group" aria-label="Language switcher">
+      <button class="lang-btn" data-lang="en" aria-label="Switch to English" aria-pressed="false">EN</button>
+      <button class="lang-btn" data-lang="ua" aria-label="Перейти на українську" aria-pressed="false">UA</button>
     </div>
     <ul>
       <li><a href="./index.html" data-i18n="nav-home">Home</a></li>
-      <li><a href="#" class="couple-names">Oleksandra & Dmytro</a></li>
+      <li><a href="./index.html" class="couple-names" aria-label="Back to home">Oleksandra &amp; Dmytro</a></li>
       <li><a href="./html/guests.html" data-i18n="nav-guests">Guests</a></li>
       <li><a href="./html/highlights.html" data-i18n="nav-highlights">Highlights</a></li>
       <li><a href="./html/guestbook.html" data-i18n="nav-wishes">Leave a Wish</a></li>
@@ -25,142 +30,145 @@
     </ul>
   </nav>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <div class="hero-overlay">
-      <span class="hero-eyebrow">October 2024</span>
-      <h1 class="hero-names">Oleksandra &amp; Dmytro</h1>
-    </div>
-  </div>
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-label="Wedding hero">
+      <div class="hero-overlay">
+        <span class="hero-eyebrow">October 2024</span>
+        <h1 class="hero-names">Oleksandra &amp; Dmytro</h1>
+      </div>
+    </section>
 
-  <!-- Timeline Section -->
-  <section class="timeline-section">
-    <div class="timeline-header">
-      <h2 data-i18n="story-subtitle">Our Story</h2>
-      <h1 data-i18n="story-title">The Journey</h1>
-    </div>
-
-    <div class="timeline">
-      <!-- Timeline Item 1 - Left -->
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <div class="timeline-text">
-            <h3 data-i18n="milestone-1-title">First Meeting</h3>
-            <span class="date" data-i18n="milestone-1-date">June 2019</span>
-            <p data-i18n="milestone-1-desc">
-              We met at a coffee shop on a rainy afternoon. What started as a
-              chance encounter became the beginning of our beautiful story
-              together.
-            </p>
-          </div>
-          <img src="./images/wedding-hero.jpg" alt="First Meeting" class="timeline-image" />
-        </div>
+    <!-- Timeline Section -->
+    <section class="timeline-section" aria-labelledby="timeline-heading">
+      <div class="timeline-header">
+        <h2 id="timeline-heading" data-i18n="story-subtitle">Our Story</h2>
+        <p data-i18n="story-title" class="timeline-section-title">The Journey</p>
       </div>
 
-      <!-- Timeline Item 2 - Right -->
-      <div class="timeline-item right">
-        <div class="timeline-content">
-          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600" alt="First Date"
-            class="timeline-image" />
-          <div class="timeline-text">
-            <h3 data-i18n="milestone-2-title">First Date</h3>
-            <span class="date" data-i18n="milestone-2-date">July 2019</span>
-            <p data-i18n="milestone-2-desc">
-              Our first official date was a walk along the pier at sunset. We
-              talked for hours and knew this was something special.
-            </p>
+      <div class="timeline">
+        <!-- Timeline Item 1 - Left -->
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <div class="timeline-text">
+              <h3 data-i18n="milestone-1-title">First Meeting</h3>
+              <span class="date" data-i18n="milestone-1-date">June 2019</span>
+              <p data-i18n="milestone-1-desc">
+                We met at a coffee shop on a rainy afternoon. What started as a
+                chance encounter became the beginning of our beautiful story
+                together.
+              </p>
+            </div>
+            <img src="./images/wedding-hero.jpg" alt="Oleksandra and Dmytro at their first meeting"
+              class="timeline-image" />
           </div>
         </div>
-      </div>
 
-      <!-- Timeline Item 3 - Left -->
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <div class="timeline-text">
-            <h3 data-i18n="milestone-3-title">Moving In Together</h3>
-            <span class="date" data-i18n="milestone-3-date">March 2021</span>
-            <p data-i18n="milestone-3-desc">
-              We took the next big step and found our first home together.
-              Every day became an adventure building our life as a team.
-            </p>
-          </div>
-          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600" alt="Getting Serious"
-            class="timeline-image" />
-        </div>
-      </div>
-
-      <!-- Timeline Item 4 - Right -->
-      <div class="timeline-item right">
-        <div class="timeline-content">
-          <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d4d82?w=600" alt="Proposal"
-            class="timeline-image" />
-          <div class="timeline-text">
-            <h3 data-i18n="milestone-4-title">The Proposal</h3>
-            <span class="date" data-i18n="milestone-4-date">December 2023</span>
-            <p data-i18n="milestone-4-desc">
-              Under the stars on a winter evening, Dmytro got down on one
-              knee. With tears of joy, Oleksandra said yes to forever.
-            </p>
+        <!-- Timeline Item 2 - Right -->
+        <div class="timeline-item right">
+          <div class="timeline-content">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600"
+              alt="A scenic pier at sunset representing their first date" class="timeline-image" />
+            <div class="timeline-text">
+              <h3 data-i18n="milestone-2-title">First Date</h3>
+              <span class="date" data-i18n="milestone-2-date">July 2019</span>
+              <p data-i18n="milestone-2-desc">
+                Our first official date was a walk along the pier at sunset. We
+                talked for hours and knew this was something special.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Timeline Item 5 - Left -->
-      <div class="timeline-item left">
-        <div class="timeline-content">
-          <div class="timeline-text">
-            <h3 data-i18n="milestone-5-title">Our Wedding Day</h3>
-            <span class="date" data-i18n="milestone-5-date">October 2024</span>
-            <p data-i18n="milestone-5-desc">
-              Surrounded by family and friends, we celebrated our love and
-              commitment. It was the most magical day of our lives.
-            </p>
+        <!-- Timeline Item 3 - Left -->
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <div class="timeline-text">
+              <h3 data-i18n="milestone-3-title">Moving In Together</h3>
+              <span class="date" data-i18n="milestone-3-date">March 2021</span>
+              <p data-i18n="milestone-3-desc">
+                We took the next big step and found our first home together.
+                Every day became an adventure building our life as a team.
+              </p>
+            </div>
+            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600"
+              alt="A cosy home interior representing moving in together" class="timeline-image" />
           </div>
-          <img src="./images/DSC_4568.jpg" alt="Wedding Day" class="timeline-image" />
+        </div>
+
+        <!-- Timeline Item 4 - Right -->
+        <div class="timeline-item right">
+          <div class="timeline-content">
+            <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d4d82?w=600"
+              alt="An engagement ring representing the proposal" class="timeline-image" />
+            <div class="timeline-text">
+              <h3 data-i18n="milestone-4-title">The Proposal</h3>
+              <span class="date" data-i18n="milestone-4-date">December 2023</span>
+              <p data-i18n="milestone-4-desc">
+                Under the stars on a winter evening, Dmytro got down on one
+                knee. With tears of joy, Oleksandra said yes to forever.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 5 - Left -->
+        <div class="timeline-item left">
+          <div class="timeline-content">
+            <div class="timeline-text">
+              <h3 data-i18n="milestone-5-title">Our Wedding Day</h3>
+              <span class="date" data-i18n="milestone-5-date">October 2024</span>
+              <p data-i18n="milestone-5-desc">
+                Surrounded by family and friends, we celebrated our love and
+                commitment. It was the most magical day of our lives.
+              </p>
+            </div>
+            <img src="./images/DSC_4568.jpg" alt="Oleksandra and Dmytro on their wedding day" class="timeline-image" />
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="counter-section">
-    <h2 data-i18n="counter-title">Our Forever</h2>
-    <div class="counter-container">
-      <div class="counter-item">
-        <div class="counter-number" id="years">0</div>
-        <div class="counter-label" data-i18n="label-years">Years</div>
+    <section class="counter-section" aria-labelledby="counter-heading">
+      <h2 id="counter-heading" data-i18n="counter-title">Our Forever</h2>
+      <div class="counter-container" aria-live="off" aria-label="Time since wedding">
+        <div class="counter-item">
+          <div class="counter-number" id="years" aria-label="Years">0</div>
+          <div class="counter-label" data-i18n="label-years">Years</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-number" id="days" aria-label="Days">0</div>
+          <div class="counter-label" data-i18n="label-days">Days</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-number" id="hours" aria-label="Hours">0</div>
+          <div class="counter-label" data-i18n="label-hours">Hours</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-number" id="minutes" aria-label="Minutes">0</div>
+          <div class="counter-label" data-i18n="label-minutes">Minutes</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-number" id="seconds" aria-label="Seconds">0</div>
+          <div class="counter-label" data-i18n="label-seconds">Seconds</div>
+        </div>
       </div>
-      <div class="counter-item">
-        <div class="counter-number" id="days">0</div>
-        <div class="counter-label" data-i18n="label-days">Days</div>
-      </div>
-      <div class="counter-item">
-        <div class="counter-number" id="hours">0</div>
-        <div class="counter-label" data-i18n="label-hours">Hours</div>
-      </div>
-      <div class="counter-item">
-        <div class="counter-number" id="minutes">0</div>
-        <div class="counter-label" data-i18n="label-minutes">Minutes</div>
-      </div>
-      <div class="counter-item">
-        <div class="counter-number" id="seconds">0</div>
-        <div class="counter-label" data-i18n="label-seconds">Seconds</div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer>
-    <div class="footer-nav">
+    <div class="footer-nav" aria-label="Footer navigation">
       <a href="index.html" data-i18n="nav-home">Home</a>
       <a href="./html/guests.html" data-i18n="nav-guests">Guests</a>
       <a href="./html/highlights.html" data-i18n="nav-highlights">Highlights</a>
-      <a href="./html/guestbook.html" data-i18n="nav-wishes">Safe Wishes</a>
+      <a href="./html/guestbook.html" data-i18n="nav-wishes">Leave a Wish</a>
       <a href="./html/submit-photos.html" data-i18n="nav-share">Share Photos</a>
     </div>
-    <p>Oleksandra & Dmytro • October 2024</p>
+    <p>Oleksandra &amp; Dmytro • October 2024</p>
     <div class="footer-credit">
       <span data-i18n="footer-by">Website by</span>
-      <a href="https://instagram.com/dnlkxx" target="_blank">Daniil</a>
+      <a href="https://instagram.com/dnlkxx" target="_blank" rel="noopener noreferrer">Daniil</a>
       | <span data-i18n="footer-made">Made with</span> ♡
     </div>
   </footer>
