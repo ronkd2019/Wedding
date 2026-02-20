@@ -147,7 +147,11 @@ function deleteMessage(id) {
     confirmBtn.addEventListener('click', onConfirm);
     cancelBtn.addEventListener('click', onCancel);
 
-    // Close on click outside (optional, but good UX)
+    // Close ×
+    const closeXBtn = document.getElementById('closeConfirmDelete');
+    if (closeXBtn) closeXBtn.onclick = closeModal;
+
+    // Close on click outside
     window.onclick = (event) => {
         if (event.target === modal) {
             closeModal();
@@ -304,11 +308,18 @@ function setupAdminListeners() {
             AppState.isAdmin = true;
             sessionStorage.setItem('guestbook_admin', 'true');
             document.body.classList.add('admin-mode');
-            renderBoard(); // Re-render to show delete buttons
+            renderBoard();
             modal.style.display = 'none';
-            alert("Admin Mode Activated! You can now delete messages.");
+            // Show a small in-page toast instead of alert()
+            const toast = document.createElement('div');
+            toast.textContent = '✓ Admin mode activated';
+            toast.style.cssText = 'position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--primary-color);color:white;padding:12px 24px;border-radius:50px;font-size:0.95rem;z-index:9999;box-shadow:0 4px 15px rgba(0,0,0,0.2);';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
         } else {
-            alert("Incorrect password!");
+            const passField = document.getElementById('adminPass');
+            passField.style.borderColor = '#e74c3c';
+            setTimeout(() => passField.style.borderColor = '', 2000);
         }
         form.reset();
     });

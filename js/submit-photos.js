@@ -8,6 +8,31 @@ const form = document.getElementById('photoForm');
 
 let selectedFiles = [];
 
+// --- Inline error helper (replaces alert()) ---
+function showError(message) {
+    const errorEl = document.getElementById('formError');
+    if (!errorEl) return;
+    errorEl.textContent = message;
+    errorEl.classList.add('visible');
+    // scrollIntoView with options not supported in Safari < 15.4 — use try/catch
+    try {
+        errorEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (e) {
+        errorEl.scrollIntoView(false);
+    }
+    setTimeout(() => errorEl.classList.remove('visible'), 6000);
+}
+
+// --- Success state: show overlay if ?sent=true in URL ---
+document.addEventListener('DOMContentLoaded', () => {
+    if (new URLSearchParams(window.location.search).get('sent') === 'true') {
+        const overlay = document.getElementById('successOverlay');
+        if (overlay) overlay.style.display = 'flex';
+        // Clean the URL without reloading
+        history.replaceState(null, '', window.location.pathname);
+    }
+});
+
 // Handle file selection
 fileInput.addEventListener('change', function (e) {
     handleFiles(this.files);
@@ -16,21 +41,17 @@ fileInput.addEventListener('change', function (e) {
 // Drag and drop functionality
 fileLabel.addEventListener('dragover', function (e) {
     e.preventDefault();
-    this.style.borderColor = 'var(--primary-color)';
-    this.style.backgroundColor = 'rgba(139, 115, 85, 0.1)';
+    this.classList.add('drag-over');
 });
 
 fileLabel.addEventListener('dragleave', function (e) {
     e.preventDefault();
-    this.style.borderColor = '#d0d0d0';
-    this.style.backgroundColor = 'var(--bg-color)';
+    this.classList.remove('drag-over');
 });
 
 fileLabel.addEventListener('drop', function (e) {
     e.preventDefault();
-    this.style.borderColor = '#d0d0d0';
-    this.style.backgroundColor = 'var(--bg-color)';
-
+    this.classList.remove('drag-over');
     const files = e.dataTransfer.files;
     handleFiles(files);
 });
@@ -41,14 +62,14 @@ function handleFiles(files) {
 
     // Limit to 10 files
     if (selectedFiles.length + filesArray.length > 10) {
-        alert('You can only upload up to 10 photos at a time. Please select fewer files.');
+        showError('You can only upload up to 10 photos at a time. Please select fewer files.');
         return;
     }
 
     // Validate file types (images only)
     const validFiles = filesArray.filter(file => {
         if (!file.type.startsWith('image/')) {
-            alert(`"${file.name}" is not an image file and will be skipped.`);
+            showError(`"${file.name}" is not an image file and will be skipped.`);
             return false;
         }
         return true;
@@ -140,22 +161,39 @@ form.addEventListener('submit', function (e) {
     // Validate at least one photo is selected
     if (selectedFiles.length === 0) {
         e.preventDefault();
-        alert('Please select at least one photo to upload.');
+        showError('Please select at least one photo to upload.');
         return;
     }
 
     // Update the file input with selected files
-    // Create a new DataTransfer to update the file input
-    const dataTransfer = new DataTransfer();
-    selectedFiles.forEach(file => {
-        dataTransfer.items.add(file);
-    });
-    fileInput.files = dataTransfer.files;
+    // new DataTransfer() is not supported in Safari < 14.5 — use try/catch
+    try {
+        const dataTransfer = new DataTransfer();
+        selectedFiles.forEach(file => {
+            dataTransfer.items.add(file);
+        });
+        fileInput.files = dataTransfer.files;
+    } catch (e) {
+        // Safari fallback: the original file input is used as-is.
+        // File removal won't be reflected, but the upload will still work
+        // since selectedFiles was already validated above.
+        console.warn('DataTransfer not supported. Using native file input.');
+    }
+
+    // Set _next URL dynamically so FormSubmit redirects back here with ?sent=true
+    let nextInput = form.querySelector('input[name="_next"]');
+    if (!nextInput) {
+        nextInput = document.createElement('input');
+        nextInput.type = 'hidden';
+        nextInput.name = '_next';
+        form.appendChild(nextInput);
+    }
+    nextInput.value = window.location.origin + window.location.pathname + '?sent=true';
 
     // Show loading state
     const submitBtn = form.querySelector('.submit-btn');
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span>Sending...</span>';
+    submitBtn.innerHTML = '<span>Sending... 📤</span>';
 
     // Let the form submit normally to FormSubmit
 });

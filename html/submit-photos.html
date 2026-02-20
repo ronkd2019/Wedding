@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Share Your Photos - Oleksandra & Dmytro 🎂</title>
+    <title>Share Your Photos - Oleksandra &amp; Dmytro 🎂</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/submit-photos.css" />
 </head>
@@ -18,13 +18,23 @@
         </div>
         <ul>
             <li><a href="../index.html" data-i18n="nav-home">Home</a></li>
-            <li><a href="#" class="couple-names">Oleksandra & Dmytro</a></li>
+            <li><a href="../index.html" class="couple-names">Oleksandra &amp; Dmytro</a></li>
             <li><a href="./guests.html" data-i18n="nav-guests">Guests</a></li>
             <li><a href="./highlights.html" data-i18n="nav-highlights">Highlights</a></li>
-            <li><a href="./guestbook.html" data-i18n="nav-wishes">Safe Wishes</a></li>
+            <li><a href="./guestbook.html" data-i18n="nav-wishes">Leave a Wish</a></li>
             <li><a href="./submit-photos.html" data-i18n="nav-share">Share Photos</a></li>
         </ul>
     </nav>
+
+    <!-- Success Overlay (shown after successful submission) -->
+    <div id="successOverlay" class="success-overlay" style="display:none;">
+        <div class="success-card">
+            <div class="success-icon">📸</div>
+            <h2>Thank You!</h2>
+            <p>Your photos have been sent successfully. We can't wait to see them! ❤️</p>
+            <a href="../index.html" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="submit-hero">
@@ -46,6 +56,9 @@
                     special day! ❤️</p>
             </div>
 
+            <!-- Error message (shown inline instead of alert) -->
+            <div id="formError" class="error-message" role="alert"></div>
+
             <!-- FormSubmit Form -->
             <form action="https://formsubmit.co/ronkd2019@gmail.com" method="POST" enctype="multipart/form-data"
                 id="photoForm">
@@ -53,6 +66,7 @@
                 <input type="hidden" name="_subject" value="New Wedding Photos Submitted!">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
+                <!-- _next is set dynamically by JS to redirect back here with ?sent=true -->
 
                 <!-- Name Field -->
                 <div class="form-group">
@@ -66,7 +80,8 @@
                     <label for="email" data-i18n="label-email">Your Email (optional)</label>
                     <input type="email" id="email" name="email" placeholder="your.email@example.com"
                         data-i18n="placeholder-email" />
-                    <small>We'll only use this to thank you or ask about your photos!</small>
+                    <small data-i18n="email-help-text">We'll only use this to thank you or ask about your
+                        photos!</small>
                 </div>
 
                 <!-- Message Field -->
@@ -111,9 +126,8 @@
             </form>
 
             <div class="form-footer">
-                <p data-i18n="tip-text">💡 <strong>Tip:</strong> Photos will be sent directly to our email. We'll
-                    cherish every single one!
-                </p>
+                <p data-i18n="tip-text">💡 <strong>Tip:</strong> Your name and message will be included with your photos
+                    so we know who sent them!</p>
             </div>
         </div>
     </section>
@@ -124,10 +138,10 @@
             <a href="../index.html" data-i18n="nav-home">Home</a>
             <a href="guests.html" data-i18n="nav-guests">Guests</a>
             <a href="./highlights.html" data-i18n="nav-highlights">Highlights</a>
-            <a href="./guestbook.html" data-i18n="nav-wishes">Safe Wishes</a>
+            <a href="./guestbook.html" data-i18n="nav-wishes">Leave a Wish</a>
             <a href="./submit-photos.html" data-i18n="nav-share">Share Photos</a>
         </div>
-        <p>Oleksandra & Dmytro • October 2024</p>
+        <p>Oleksandra &amp; Dmytro • October 2024</p>
         <div class="footer-credit">
             <span data-i18n="footer-by">Website by</span>
             <a href="https://instagram.com/dnlkxx" target="_blank">Daniil</a>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600&family=Kelly+Slab&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600&family=Kelly+Slab&family=Neucha&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
 /* Reset & Variables */
 :root {
@@ -33,6 +33,13 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* iOS Safari: disable smooth scroll (not supported pre-15.4, causes no-op) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -120,13 +127,19 @@ nav {
   left: 0;
   width: 100%;
   padding: 15px 40px;
+  /* Respect notch/safe area on iOS */
+  padding-left: max(40px, env(safe-area-inset-left));
+  padding-right: max(40px, env(safe-area-inset-right));
   background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   z-index: 1000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
+  -webkit-align-items: center;
   align-items: center;
   transition: all 0.3s ease;
 }
@@ -282,11 +295,16 @@ nav .couple-names::after {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../images/wedding-hero.jpg');
   background-size: cover;
   background-position: center;
+  /* background-attachment: fixed is ignored silently on iOS Safari */
   background-attachment: fixed;
   position: relative;
+  display: -webkit-flex;
   display: flex;
+  -webkit-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-flex-direction: column;
   flex-direction: column;
   color: white;
   text-align: center;
@@ -308,6 +326,121 @@ nav .couple-names::after {
   width: 100%;
   height: 200px;
   background: linear-gradient(to top, var(--bg-color), transparent);
+}
+
+/* iOS Safari does not support background-attachment: fixed accurately */
+@supports (-webkit-touch-callout: none) {
+  .hero {
+    background-attachment: scroll;
+  }
+}
+
+/* Hero Overlay Content */
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+.hero-names {
+  font-family: var(--font-heading);
+  font-size: 5.5rem;
+  color: white !important;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  line-height: 1.1;
+  margin-bottom: 0;
+}
+
+/* Nav Backdrop (mobile) */
+.nav-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.nav-backdrop.visible {
+  display: block;
+}
+
+/* Inline Form Error Message */
+.error-message {
+  display: none;
+  background: #fde8e8;
+  color: #c0392b;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 4px solid #c0392b;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.error-message.visible {
+  display: block;
+}
+
+/* Success Overlay */
+.success-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(139, 115, 85, 0.95);
+  z-index: 2000;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.success-card {
+  background: white;
+  border-radius: 20px;
+  padding: 60px 40px;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.success-card h2 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.success-card p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
 }
 
 /* --- Timeline Section --- */
@@ -730,6 +863,10 @@ footer {
 @media screen and (max-width: 480px) {
   .hero h1 {
     font-size: 3.5rem;
+  }
+
+  .hero-names {
+    font-size: 3.2rem;
   }
 
   .counter-number {

@@ -4,12 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guestbook - Oleksandra & Dmytro 🎂</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;600&family=Kelly+Slab&family=Neucha&display=swap"
-        rel="stylesheet" />
+    <title>Guestbook - Oleksandra &amp; Dmytro 🎂</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/guestbook.css" />
 </head>
@@ -19,7 +14,6 @@
     <div class="corkboard-texture"></div>
 
     <!-- Navigation -->
-    <!-- Navigation -->
     <nav>
         <div class="lang-switcher">
             <button class="lang-btn" data-lang="en">EN</button>
@@ -27,10 +21,10 @@
         </div>
         <ul>
             <li><a href="../index.html" data-i18n="nav-home">Home</a></li>
-            <li><a href="#" class="couple-names">Oleksandra & Dmytro</a></li>
+            <li><a href="../index.html" class="couple-names">Oleksandra &amp; Dmytro</a></li>
             <li><a href="./guests.html" data-i18n="nav-guests">Guests</a></li>
             <li><a href="./highlights.html" data-i18n="nav-highlights">Highlights</a></li>
-            <li><a href="./guestbook.html" data-i18n="nav-wishes">Safe Wishes</a></li>
+            <li><a href="./guestbook.html" data-i18n="nav-wishes">Leave a Wish</a></li>
             <li><a href="./submit-photos.html" data-i18n="nav-share">Share Photos</a></li>
         </ul>
     </nav>
@@ -47,10 +41,10 @@
     </div>
 
     <!-- Add Note Modal -->
-    <div id="noteModal" class="modal">
+    <div id="noteModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="noteModalTitle">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 data-i18n="modal-title">Write your wish</h2>
+            <span class="close-modal" role="button" aria-label="Close">&times;</span>
+            <h2 id="noteModalTitle" data-i18n="modal-title">Write your wish</h2>
             <form id="noteForm">
                 <div class="form-group">
                     <label for="guestName" data-i18n="label-name">Your Name</label>
@@ -75,10 +69,10 @@
     </div>
 
     <!-- Admin Login Modal -->
-    <div id="adminModal" class="modal">
+    <div id="adminModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
         <div class="modal-content small">
-            <span class="close-modal" id="closeAdmin">&times;</span>
-            <h2 data-i18n="admin-title">Admin Login</h2>
+            <span class="close-modal" id="closeAdmin" role="button" aria-label="Close">&times;</span>
+            <h2 id="adminModalTitle" data-i18n="admin-title">Admin Login</h2>
             <form id="adminForm">
                 <div class="form-group">
                     <label for="adminPass" data-i18n="label-password">Password</label>
@@ -90,9 +84,11 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div id="confirmDeleteModal" class="modal">
+    <div id="confirmDeleteModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
         <div class="modal-content small">
-            <h2 data-i18n="confirm-delete-title" style="font-family: var(--font-heading); color: var(--primary-color);">
+            <span class="close-modal" id="closeConfirmDelete" role="button" aria-label="Close">&times;</span>
+            <h2 id="deleteModalTitle" data-i18n="confirm-delete-title"
+                style="font-family: var(--font-heading); color: var(--primary-color);">
                 Delete Note?</h2>
             <p data-i18n="confirm-delete-text"
                 style="font-family: var(--font-body); color: var(--text-color); margin-bottom: 20px;">Are you sure you
@@ -117,7 +113,6 @@
     </div>
 
     <!-- Footer -->
-    <!-- Footer -->
     <footer style="margin-top: auto;">
         <div class="footer-nav">
             <a href="../index.html" data-i18n="nav-home">Home</a>
@@ -126,14 +121,14 @@
             <a href="guestbook.html" data-i18n="nav-wishes">Leave a Wish</a>
             <a href="submit-photos.html" data-i18n="nav-share">Share Photos</a>
         </div>
-        <p>Oleksandra & Dmytro • October 2024</p>
+        <p>Oleksandra &amp; Dmytro • October 2024</p>
         <div class="footer-credit">
             <span data-i18n="footer-by">Website by</span>
             <a href="https://instagram.com/dnlkxx" target="_blank">Daniil</a>
             | <span data-i18n="footer-made">Made with</span> ♡
         </div>
-        <!-- Admin Trigger (Hidden) -->
-        <div class="admin-trigger" id="adminTrigger">💍</div>
+        <!-- Admin Trigger (Hidden - click the ring to access admin) -->
+        <div class="admin-trigger" id="adminTrigger" title="Admin access" aria-label="Admin access">💍</div>
     </footer>
 
     <!-- Firebase SDK (Compat) -->

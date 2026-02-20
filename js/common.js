@@ -29,11 +29,30 @@ function initNavigation() {
         const ul = nav.querySelector('ul');
         nav.insertBefore(hamburger, ul);
 
+        // Create backdrop
+        const backdrop = document.createElement('div');
+        backdrop.className = 'nav-backdrop';
+        document.body.appendChild(backdrop);
+
+        const closeMenu = () => {
+            nav.classList.remove('nav-open');
+            hamburger.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            backdrop.classList.remove('visible');
+        };
+
         hamburger.addEventListener('click', () => {
-            nav.classList.toggle('nav-open');
+            const isOpen = nav.classList.toggle('nav-open');
             hamburger.classList.toggle('active');
             document.body.classList.toggle('no-scroll');
+            if (isOpen) {
+                backdrop.classList.add('visible');
+            } else {
+                backdrop.classList.remove('visible');
+            }
         });
+
+        backdrop.addEventListener('click', closeMenu);
     }
 
     // 2. Active Link Highlighting
@@ -60,6 +79,8 @@ function initNavigation() {
             const hamburger = document.querySelector('.hamburger');
             if (hamburger) hamburger.classList.remove('active');
             document.body.classList.remove('no-scroll');
+            const backdrop = document.querySelector('.nav-backdrop');
+            if (backdrop) backdrop.classList.remove('visible');
         });
     });
 }

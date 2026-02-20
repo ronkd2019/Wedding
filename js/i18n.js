@@ -80,7 +80,9 @@ const translations = {
         "confirm-delete-text": "Are you sure you want to remove this message? This cannot be undone.",
         "label-dont-ask": "Do not show again",
         "btn-cancel": "Cancel",
-        "btn-delete": "Delete"
+        "btn-delete": "Delete",
+        "email-help-text": "We'll only use this to thank you or ask about your photos!",
+        "tip-text": "💡 Your name and message will be included with your photos so we know who sent them!"
     },
     ua: {
         "nav-home": "Головна",
@@ -163,7 +165,9 @@ const translations = {
         "confirm-delete-text": "Ви впевнені, що хочете видалити це повідомлення? Цю дію неможливо скасувати.",
         "label-dont-ask": "Більше не запитувати",
         "btn-cancel": "Скасувати",
-        "btn-delete": "Видалити"
+        "btn-delete": "Видалити",
+        "email-help-text": "Ми використаємо це лише щоб подякувати або запитати про ваші фото!",
+        "tip-text": "💡 Ваше ім'я та повідомлення будуть додані до фото, щоб ми знали від кого вони!"
     }
 };
 

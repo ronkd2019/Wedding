@@ -19,6 +19,7 @@
     margin-bottom: 10px;
     opacity: 0.9;
     letter-spacing: 2px;
+    color: white;
 }
 
 .hero-content h1 {
@@ -26,6 +27,7 @@
     font-size: 4rem;
     margin-bottom: 20px;
     font-weight: 700;
+    color: white;
 }
 
 .hero-content p {
@@ -139,7 +141,8 @@
     text-align: center;
 }
 
-.file-upload-label:hover {
+.file-upload-label:hover,
+.file-upload-label.drag-over {
     border-color: var(--primary-color);
     background: rgba(139, 115, 85, 0.05);
 }

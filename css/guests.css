@@ -7,8 +7,9 @@
 
 body {
   font-family: "Caveat", cursive;
-  background: linear-gradient(135deg, #fff 0%, #faf8f3 50%, #e8f4e8 100%);
-  background-attachment: fixed;
+  background: linear-gradient(135deg, #fff 0%, #faf8f3 50%, #ebe0d1 100%);
+  /* iOS Safari ignores fixed. Scroll is almost identical visually on mobile. */
+  background-attachment: scroll;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
@@ -143,11 +144,20 @@ body {
 
 .photo-frame {
   width: 100%;
-  aspect-ratio: 1;
+  /* Fallback for browsers without aspect-ratio support */
+  padding-top: 100%;
   overflow: hidden;
   background: #2a2a2a;
   border: 1px solid #e0e0e0;
   position: relative;
+}
+
+/* Override padding-top with aspect-ratio where supported */
+@supports (aspect-ratio: 1) {
+  .photo-frame {
+    padding-top: 0;
+    aspect-ratio: 1;
+  }
 }
 
 .polaroid-photo {
@@ -364,5 +374,9 @@ body {
 
   .polaroid-caption .name {
     font-size: 20px;
+  }
+
+  .sticky-note {
+    display: none;
   }
 }
