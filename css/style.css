@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600&family=Neucha&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600&family=Neucha&display=swap');
 
 /* Reset & Variables */
 :root {
@@ -151,7 +151,7 @@ body {
   position: relative;
 }
 
-/* Subtle paper grain — present on ALL pages, creates physical texture feel */
+/* Paper grain — pointer-events:none so it never blocks clicks or layout */
 body::before {
   content: '';
   position: fixed;
@@ -253,9 +253,8 @@ nav {
   padding-left: max(40px, env(safe-area-inset-left));
   padding-right: max(40px, env(safe-area-inset-right));
   background: rgba(255, 255, 255, 0.85);
-  /* Reduced from blur(12px) to blur(6px) — halves GPU repaint cost on every scroll */
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   z-index: 1000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   display: -webkit-flex;
