@@ -32,7 +32,7 @@
 
   <main id="main-content">
     <!-- Hero Section -->
-    <section class="hero" aria-label="Wedding hero">
+    <section class="hero" aria-label="Wedding hero" data-image-slot="hero">
       <div class="hero-overlay">
         <span class="hero-eyebrow">October 2024</span>
         <h1 class="hero-names">Oleksandra &amp; Dmytro</h1>
@@ -60,7 +60,7 @@
               </p>
             </div>
             <img src="./images/wedding-hero.jpg" alt="Oleksandra and Dmytro at their first meeting"
-              class="timeline-image" />
+              class="timeline-image" data-image-slot="timeline-1" />
           </div>
         </div>
 
@@ -68,7 +68,8 @@
         <div class="timeline-item right">
           <div class="timeline-content">
             <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600"
-              alt="A scenic pier at sunset representing their first date" class="timeline-image" />
+              alt="A scenic pier at sunset representing their first date" class="timeline-image"
+              data-image-slot="timeline-2" />
             <div class="timeline-text">
               <h3 data-i18n="milestone-2-title">First Date</h3>
               <span class="date" data-i18n="milestone-2-date">July 2019</span>
@@ -92,7 +93,8 @@
               </p>
             </div>
             <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600"
-              alt="A cosy home interior representing moving in together" class="timeline-image" />
+              alt="A cosy home interior representing moving in together" class="timeline-image"
+              data-image-slot="timeline-3" />
           </div>
         </div>
 
@@ -100,7 +102,7 @@
         <div class="timeline-item right">
           <div class="timeline-content">
             <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d4d82?w=600"
-              alt="An engagement ring representing the proposal" class="timeline-image" />
+              alt="An engagement ring representing the proposal" class="timeline-image" data-image-slot="timeline-4" />
             <div class="timeline-text">
               <h3 data-i18n="milestone-4-title">The Proposal</h3>
               <span class="date" data-i18n="milestone-4-date">December 2023</span>
@@ -123,7 +125,8 @@
                 commitment. It was the most magical day of our lives.
               </p>
             </div>
-            <img src="./images/DSC_4568.jpg" alt="Oleksandra and Dmytro on their wedding day" class="timeline-image" />
+            <img src="./images/DSC_4568.jpg" alt="Oleksandra and Dmytro on their wedding day" class="timeline-image"
+              data-image-slot="timeline-5" />
           </div>
         </div>
       </div>
@@ -182,6 +185,7 @@
   <script src="./js/common.js"></script>
   <script src="./js/i18n.js"></script>
   <script src="./js/counter.js"></script>
+  <script src="./js/image-loader.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 
